@@ -475,6 +475,16 @@ figcaption b,.table-cap b{letter-spacing:.06em}
 @media(max-width:560px){.points li{grid-template-columns:minmax(0,1fr);gap:2px}}
 .issue p{line-height:1.75}
 ol.future li strong{color:var(--text)}
+
+/* 圖一圓圈圖 */
+.donut{display:block;width:100%;height:auto;max-width:560px}
+.donut text{font-family:var(--font-sans);fill:var(--muted);font-size:17px}
+.donut .p{font-family:var(--font-num);font-weight:700;font-size:21px;fill:var(--text)}
+.donut .hot{fill:var(--accent)}
+.donut .n.hot{font-weight:700}
+.donut .s{font-size:13px;fill:var(--faint)}
+.donut .c{font-family:var(--font-num);font-weight:700;font-size:76px;letter-spacing:-.05em;fill:var(--text)}
+.donut .cu{font-size:30px;fill:var(--accent);letter-spacing:0}
 </style>
 </head>
 <body>
@@ -536,7 +546,7 @@ ol.future li strong{color:var(--text)}
 <!-- 電影式過場句 -->
 <div class="statement">
   <div class="wrap">
-    <p class="reveal">廢氣排放正在減少。<br><span class="dim">但電動車更重、扭力更大——</span><br><span class="hl">輪胎，仍在一路磨損。</span></p>
+    <p class="reveal">車輛廢氣排放隨電動化而減少，<br><span class="dim">但電動車質量較大、瞬間扭力較高，</span><br><span class="hl">輪胎磨損微粒的排放並未改善。</span></p>
   </div>
 </div>
 
@@ -544,31 +554,25 @@ ol.future li strong{color:var(--text)}
 <section id="problem" class="alt">
   <div class="wrap">
     <div class="eyebrow reveal">01 — The Problem</div>
-    <h2 class="reveal">看不見的污染源，<br>藏在每一圈輪胎之下</h2>
+    <h2 class="reveal">輪胎與路面磨損微粒<br>的排放問題</h2>
     <p class="lead reveal">隨著電動車市佔率持續攀升，車輛之廢氣排放隨之減少，但電動車因電池質量增加與瞬間高扭力之特性，輪胎與路面磨損微粒（TRWP）之排放問題並未隨之改善。</p>
 
     <div class="mt-m">
       <div class="big-stat">
-        <div class="reveal"><div class="mega"><span data-count="28" data-dec="0">28</span><span class="u">%</span></div></div>
+        <figure class="reveal">
+          <svg class="donut" viewBox="0 0 600 430" role="img" aria-label="全球初級微塑膠排放來源比例：人造纖維 35%、輪胎磨損 28%、日常耗損 24%、其他 13%（含洗面乳 2%）"><circle cx="300" cy="215" r="130" fill="none" stroke="var(--muted)" stroke-opacity="0.7" stroke-width="46" stroke-dasharray="282.9 816.8" stroke-dashoffset="0.0" transform="rotate(-90 300 215)"/><circle cx="300" cy="215" r="130" fill="none" stroke="var(--accent)" stroke-opacity="1" stroke-width="46" stroke-dasharray="225.7 816.8" stroke-dashoffset="-285.9" transform="rotate(-90 300 215)"/><circle cx="300" cy="215" r="130" fill="none" stroke="var(--faint)" stroke-opacity="0.8" stroke-width="46" stroke-dasharray="193.0 816.8" stroke-dashoffset="-514.6" transform="rotate(-90 300 215)"/><circle cx="300" cy="215" r="130" fill="none" stroke="var(--muted)" stroke-opacity="0.28" stroke-width="46" stroke-dasharray="103.2 816.8" stroke-dashoffset="-710.6" transform="rotate(-90 300 215)"/><text x="459" y="134" text-anchor="start"><tspan class="p">35%</tspan><tspan class="n" dx="8">人造纖維</tspan></text><text x="311" y="407" text-anchor="middle"><tspan class="p hot">28%</tspan><tspan class="n hot" dx="8">輪胎磨損</tspan></text><text x="122" y="215" text-anchor="end"><tspan class="p">24%</tspan><tspan class="n" dx="8">日常耗損</tspan></text><text x="229" y="52" text-anchor="end"><tspan class="p">13%</tspan><tspan class="n" dx="8">其他</tspan></text><text x="229" y="72" text-anchor="end" class="s">含洗面乳 2%</text><text x="300" y="233" text-anchor="middle" class="c">28<tspan class="cu">%</tspan></text><text x="300" y="261" text-anchor="middle" class="s">輪胎磨損</text></svg>
+          <figcaption><b>圖一</b>全球初級微塑膠排放來源比例（依報告圖一數據重繪；原始數據：Boucher &amp; Friot, 2017）</figcaption>
+        </figure>
         <div class="reveal d1">
           <h3>全球初級微塑膠的第二大來源</h3>
-          <p class="muted">依 Boucher 與 Friot 之原始數據，輪胎磨損約佔全球初級微塑膠排放 28%，僅次於人造纖維（35%）。</p>
-          <figure class="mt-s" style="max-width:460px">
-            <div class="bars" role="img" aria-label="全球初級微塑膠排放來源比例：人造纖維 35%、輪胎磨損 28%、日常耗損 24%、洗面乳 2%">
-              <div class="bar"><span class="small">人造纖維</span><div class="track"><div class="fill off" style="--w:100%"></div></div><span class="n">35%</span></div>
-              <div class="bar"><span class="small" style="color:var(--accent)">輪胎磨損</span><div class="track"><div class="fill" style="--w:80%"></div></div><span class="n hl">28%</span></div>
-              <div class="bar"><span class="small">日常耗損</span><div class="track"><div class="fill off" style="--w:68.6%"></div></div><span class="n">24%</span></div>
-              <div class="bar"><span class="small">洗面乳</span><div class="track"><div class="fill off" style="--w:5.7%"></div></div><span class="n">2%</span></div>
-            </div>
-            <figcaption style="margin-top:14px"><b>圖一</b>全球初級微塑膠排放來源比例（依報告圖一數據重繪；原始數據：Boucher &amp; Friot, 2017）。其餘較小來源未逐項列出。</figcaption>
-          </figure>
+          <p class="muted">依 Boucher 與 Friot 之原始數據，輪胎磨損約佔全球初級微塑膠排放 <strong>28%</strong>，僅次於人造纖維（35%）。</p>
         </div>
       </div>
 
       <div class="big-stat">
         <div class="reveal"><div class="mega">+<span data-count="53.5" data-dec="1">53.5</span><span class="u">%</span></div></div>
         <div class="reveal d1">
-          <h3>電動化，不等於零排放</h3>
+          <h3>非廢氣微粒排放預估持續增加</h3>
           <p class="muted">OECD 評估指出，重型電動車之非廢氣 PM2.5 排放量較同級燃油車高約 <strong>3–8%</strong>；全球乘用車之非廢氣微粒排放總量，預估至 2030 年將增加約 <strong>53.5%</strong>。</p>
         </div>
       </div>
@@ -576,7 +580,7 @@ ol.future li strong{color:var(--text)}
       <div class="big-stat">
         <div class="reveal"><div class="mega accent">6PPD</div></div>
         <div class="reveal d1">
-          <h3>微粒裡藏著防老劑 6PPD</h3>
+          <h3>TRWP 含有防老劑 6PPD</h3>
           <p class="muted">TRWP 不只包含橡膠，更含有防老劑 6PPD。其氧化產物 <strong>6PPD-quinone（6PPD-Q）</strong>隨雨水沖刷進入生態圈後，已證實對水生生物具<strong>急性毒性</strong>，且已於<strong>人體尿液中檢出</strong>。</p>
           <div class="chem">6PPD = N-(1,3-二甲基丁基)-N′-苯基對苯二胺<br>C₁₈H₂₄N₂ · 理論精確質量 268.1934 Da</div>
         </div>
@@ -584,7 +588,7 @@ ol.future li strong{color:var(--text)}
     </div>
 
     <div class="mt-l">
-      <h3 class="reveal">現有方案，卡在哪裡？</h3>
+      <h3 class="reveal">現有方案的限制</h3>
       <p class="muted reveal" style="max-width:760px">國內外針對非廢氣排放微粒（NEE）的處理，多停留在法制研析與成分量測階段；實務硬體上，則多半採用傳統物理濾網或被動式空氣動力學導流。</p>
       <div class="grid g3 mt-s">
         <div class="card flaw reveal d1">
@@ -608,7 +612,7 @@ ol.future li strong{color:var(--text)}
 <section id="principle">
   <div class="wrap">
     <div class="eyebrow reveal">02 — How It Works</div>
-    <h2 class="reveal">不靠濾網擋，<br>用<span class="hl">電場</span>把微粒「拉」下來</h2>
+    <h2 class="reveal">不使用濾網，<br>以<span class="hl">電場</span>吸附微粒</h2>
     <p class="lead reveal">含微粒的氣流通過施加高壓直流電的平行銅片極板時，微粒受橫向庫侖力偏折、吸附於極板上——這就是<strong>靜電集塵（Electrostatic Precipitation, ESP）</strong>。</p>
 
     <div class="formula-row mt-m">
@@ -668,7 +672,7 @@ ol.future li strong{color:var(--text)}
 
     <div class="split mt-l">
       <div class="reveal">
-        <h3>微粒如何帶電？為什麼 TRWP 較易被抓？</h3>
+        <h3>微粒的荷電機制與捕捉條件</h3>
         <ul class="points">
           <li><b>電荷來源</b><span>本裝置<strong>未設電暈放電極</strong>；電荷來自輪胎摩擦產生的靜電，以及接觸極板時的傳導荷電。</span></li>
           <li><b>導電微粒</b><span>一碰到極板就取得同極性電荷。TRWP 含<strong>碳黑</strong>等導電填料，粒徑小者易在 17 mm 間距內被 15 kV 電場偏折捕獲。</span></li>
@@ -704,7 +708,7 @@ ol.future li strong{color:var(--text)}
 <section id="device" class="alt">
   <div class="wrap">
     <div class="eyebrow reveal">03 — The Device</div>
-    <h2 class="reveal">從草圖到實機</h2>
+    <h2 class="reveal">裝置設計與實作</h2>
     <p class="lead reveal">外殼可搭載於輪轂馬達後方，設計重點是<strong>氣流導引</strong>與<strong>高壓絕緣</strong>：避免車輛振動與潮濕環境下發生沿面漏電或極板跳火。</p>
 
     <div class="split mt-m">
@@ -896,7 +900,7 @@ ol.future li strong{color:var(--text)}
 
       <div class="split mt-m">
         <div class="reveal">
-          <h4>為什麼選 NO（常開）接點？</h4>
+          <h4>選用 NO（常開）接點的理由</h4>
           <p class="muted" style="font-size:15px">故障安全（fail-safe）：Arduino 當機、電源異常或訊號線鬆脫時，繼電器線圈失磁、簧片彈回，<strong>高壓自動關閉</strong>。若採 NC 接點，故障時高壓反而持續開啟。</p>
           <h4 class="mt-m">麵包板驗收結果 <span class="cite">表一</span></h4>
           <ul class="checklist mt-s">
@@ -977,14 +981,14 @@ ol.future li strong{color:var(--text)}
 <section id="results">
   <div class="wrap">
     <div class="eyebrow reveal">04 — Results</div>
-    <h2 class="reveal">三階段驗證：<br>抓得到、抓得多、<span class="hl">抓到的是什麼</span></h2>
+    <h2 class="reveal">三階段驗證：<br>靜態、動態與<span class="hl">化學鑑定</span></h2>
     <p class="lead reveal">靜態封閉導流 → 動態輪胎摩擦 → 高解析質譜化學鑑定。</p>
 
     <!-- STAGE 1 靜態 -->
     <div class="stage mt-m">
       <div class="reveal">
         <div class="no">Stage 1 · 靜態捕捉效率 η</div>
-        <h3>開啟電場的每一次，都遠高於關閉時</h3>
+        <h3>電場開啟前後之捕捉效率比較</h3>
         <div class="stat"><span class="from">0.72 →</span><span data-count="16.29" data-dec="2">16.29</span><span class="u">%</span></div>
         <p>僅電場開關不同，效率相差約 <strong>22 倍</strong>；兩組數值範圍<strong>完全沒有重疊</strong>（關閉 ≤ 1.00%，開啟 9.00%–21.00%），差異可歸因於庫侖力。</p>
         <p class="small">關閉組三次極板增重均為天平最小讀值（0.001 g），0.72% 實為量測下限。</p>
@@ -1015,7 +1019,7 @@ ol.future li strong{color:var(--text)}
     <div class="stage">
       <div class="reveal">
         <div class="no">Stage 2 · 動態平均捕捉效率</div>
-        <h3>越貼近輪胎，不一定越好</h3>
+        <h3>粉塵擴散分布與動態捕捉效率</h3>
         <div class="stat">≈<span data-count="28" data-dec="0">28</span><span class="u">%</span></div>
         <p><strong>350 RPM</strong>（≈ 33 km/h）下摩擦砂紙 10／20／30 秒各三次，整體效率平均 <strong>27.6%</strong>；受天平解析度限制，約落於二成至三成。</p>
         <p>水平 1 cm 處的沉積量反而低於 3 cm 與 5 cm：太貼近胎面時粉塵尚未擴散，且仍在邊界層流內。<strong>裝置位置應依實際擴散分布決定</strong>。</p>
@@ -1063,7 +1067,7 @@ ol.future li strong{color:var(--text)}
     <div class="stage">
       <div class="reveal">
         <div class="no">Stage 3 · 質譜鑑定質量誤差（6PPD）</div>
-        <h3>從「抓到多少」到「抓到的是什麼」</h3>
+        <h3>兩組粉塵樣品之 6PPD 訊號比對</h3>
         <div class="stat"><span data-count="2.98" data-dec="2">2.98</span><span class="u">ppm</span></div>
         <p>兩組粉塵皆於 m/z 268 出現與 6PPD（C₁₈H₂₄N₂，理論 268.1934 Da）相近的訊號，誤差皆小於 5 ppm。</p>
         <ul class="points">
@@ -1088,7 +1092,7 @@ ol.future li strong{color:var(--text)}
 
     <!-- 理論 vs 實測 -->
     <div class="stage-end reveal">
-      <h3>誠實面對差距：理論 vs. 實測</h3>
+      <h3>理論預估與實測比較</h3>
       <div class="tbl mt-s">
         <table>
           <thead><tr><th>比較項目</th><th>理論／文獻預估</th><th>本研究實測</th><th>差異說明</th></tr></thead>
@@ -1108,7 +1112,7 @@ ol.future li strong{color:var(--text)}
 <!-- 過場句 -->
 <div class="statement" style="background:var(--bg-2)">
   <div class="wrap">
-    <p class="reveal">將微粒攔截於源頭、<br>阻斷其進入逕流之途徑——<br><span class="hl">本身即是最大的環境效益。</span></p>
+    <p class="reveal">將微粒攔截於源頭、<br>阻斷其進入逕流之途徑，<br><span class="hl">為本裝置的主要環境效益。</span></p>
   </div>
 </div>
 
@@ -1116,12 +1120,12 @@ ol.future li strong{color:var(--text)}
 <section id="vision">
   <div class="wrap">
     <div class="eyebrow reveal">05 — Vision</div>
-    <h2 class="reveal">非廢氣排放，<br>正成為法規新焦點</h2>
+    <h2 class="reveal">法規趨勢與應用方向</h2>
 
     <div class="big-stat" style="border-top:0;padding-top:0">
       <div class="reveal"><div class="mega accent" style="font-size:clamp(44px,6.6vw,92px);white-space:nowrap">Euro 7</div></div>
       <div class="reveal d1">
-        <h3>全球首例針對非廢氣排放的車輛法規</h3>
+        <h3>首度將輪胎磨耗率納入車輛型式認證</h3>
         <p class="muted">歐盟 Euro 7 於 2024 年通過，首度將煞車微粒與輪胎磨耗率納入車輛型式認證。但它規範的是輪胎本身，<strong>並未要求加裝捕捉裝置</strong>——本裝置的定位是法規以外的補充減排手段。</p>
       </div>
     </div>
@@ -1227,7 +1231,7 @@ ol.future li strong{color:var(--text)}
 <!-- ================= 8. FOOTER ================= -->
 <footer>
   <div class="wrap">
-    <div class="big reveal">Capture it<br>at the <span>source.</span></div>
+    <div class="big reveal">Active Electrostatic<br>Capture of <span>TRWP</span></div>
     <p class="muted mt-s reveal">主動式輪胎磨損微粒（TRWP）靜電捕捉裝置 · 中原大學機械系<br>專題指導教授：杜哲怡　專題生：陳睿瑀、李恩、林子鈞</p>
     <p class="small reveal">關鍵字：輪胎磨損微粒、靜電集塵、非廢氣排放、6PPD</p>
 
