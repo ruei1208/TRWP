@@ -5,40 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TRWP 靜電捕捉裝置</title>
 <meta name="description" content="中原大學機械系專題：以 15 kV 直流高壓電場結合 48 V 輪轂馬達，無須濾網，於源頭攔截部分輪胎磨損微粒（TRWP）。">
-<meta name="theme-color" content="#0a120e">
+<meta name="theme-color" content="#0b0a09">
 <meta property="og:type" content="website">
 <meta property="og:title" content="主動式輪胎磨損微粒（TRWP）靜電捕捉裝置">
 <meta property="og:description" content="中原大學機械系專題：以 15 kV 直流高壓電場結合 48 V 輪轂馬達，無須濾網，於源頭攔截部分輪胎磨損微粒。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a120e'/%3E%3Crect x='17' y='14' width='5' height='36' rx='2' fill='%23ff7a1a'/%3E%3Crect x='29.5' y='14' width='5' height='36' rx='2' fill='%23ff7a1a'/%3E%3Crect x='42' y='14' width='5' height='36' rx='2' fill='%23ff7a1a'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0a09'/%3E%3Crect x='17' y='14' width='5' height='36' rx='2' fill='%23ff8a1a'/%3E%3Crect x='29.5' y='14' width='5' height='36' rx='2' fill='%23ff8a1a'/%3E%3Crect x='42' y='14' width='5' height='36' rx='2' fill='%23ff8a1a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    配色與字體：只要改這裡就能整站微調
    ========================================================= */
 :root{
-  --bg:        #0a120e;   /* 主背景：近黑墨綠 */
-  --bg-2:      #0f1a15;   /* 次背景（交錯段落） */
-  --surface:   #14221c;   /* 卡片 */
-  --surface-2: #1b2c25;   /* 卡片 hover / 表頭 */
-  --line:      #25382f;   /* 分隔線 */
-  --text:      #e9f0ec;   /* 主文字 */
-  --muted:     #93a69c;   /* 次要文字 */
-  --faint:     #7d9087;   /* 更淡的註解（深色背景上對比度約 5:1） */
-  --accent:    #ff7a1a;   /* 強調色：高壓橘 */
-  --accent-2:  #ffb070;   /* 強調色淺階 */
-  --accent-bg: rgba(255,122,26,.10);
-  --eco:       #7fd6a4;   /* 輔助色：環保綠（少量使用） */
-  --danger:    #ff5a4e;
+  --l:         242,239,232;            /* 線條與淡色塊用的基準色（暖白） */
+  --bg:        #0b0a09;                /* 主背景：近黑暖色 */
+  --bg-2:      rgba(var(--l),.025);    /* 次背景（交錯段落） */
+  --surface:   rgba(var(--l),.03);     /* 卡片 */
+  --surface-2: rgba(var(--l),.06);     /* 表頭 */
+  --line:      rgba(var(--l),.14);     /* 分隔線 */
+  --text:      #f2efe8;                /* 主文字 */
+  --muted:     #a8a297;                /* 次要文字 */
+  --faint:     #77726a;                /* 更淡的註解 */
+  --accent:    #ff8a1a;                /* 強調色：橘 */
+  --accent-2:  #ffb35c;                /* 強調色淺階 */
+  --accent-bg: rgba(255,138,26,.10);
+  --eco:       #7fd6a4;                /* 只用於低壓控制迴路 */
+  --danger:    #ff5a2e;
 
-  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-  --font-num:  "Space Grotesk", "Noto Sans TC", system-ui, sans-serif;
+  --font-sans: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --font-num:  "JetBrains Mono", ui-monospace, Consolas, monospace;
   --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 
   --maxw: 1180px;
-  --gutter: clamp(16px, 4vw, 40px);
-  --radius: 14px;
+  --gutter: clamp(20px, 6vw, 88px);
+  --radius: 2px;
   --ease: cubic-bezier(.2,.7,.2,1);
 }
 
@@ -57,7 +58,7 @@ section.alt{background:var(--bg-2)}
 /* ---------- 導覽列 ---------- */
 .nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
   padding:14px var(--gutter);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
-.nav.scrolled{background:rgba(10,18,14,.85);backdrop-filter:blur(10px);border-color:var(--line)}
+.nav.scrolled{background:rgba(11,10,9,.88);backdrop-filter:blur(10px);border-color:var(--line)}
 .brand{font-family:var(--font-num);font-weight:700;letter-spacing:.08em;font-size:15px;text-decoration:none;display:flex;gap:10px;align-items:center}
 .brand i{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
 .nav ul{list-style:none;display:flex;gap:22px;font-size:14px}
@@ -73,8 +74,8 @@ section.alt{background:var(--bg-2)}
 .nav.open .menu-btn span::after{transform:translateY(-6px) rotate(-45deg)}
 @media(max-width:860px){
   .menu-btn{display:block}
-  .nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(10,18,14,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:6px var(--gutter) 14px}
-  .nav.open{background:rgba(10,18,14,.97);border-color:var(--line)}
+  .nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(11,10,9,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:6px var(--gutter) 14px}
+  .nav.open{background:rgba(11,10,9,.97);border-color:var(--line)}
   .nav.open ul{display:flex}
   .nav ul a{display:block;padding:13px 0;font-size:17px;border-bottom:1px solid var(--line)}
   .nav ul li:last-child a{border-bottom:0}
@@ -132,7 +133,7 @@ figcaption b{color:var(--accent);font-family:var(--font-mono);font-weight:500;ma
 .hero .wrap{position:relative;z-index:1;width:100%}
 .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,var(--bg));z-index:0;pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
-.hero-photo .frame{box-shadow:0 30px 80px -20px rgba(255,122,26,.35),0 0 0 1px rgba(255,122,26,.35)}
+.hero-photo .frame{box-shadow:0 30px 80px -20px rgba(255,138,26,.35),0 0 0 1px rgba(255,138,26,.35)}
 .hero-photo{max-width:400px;justify-self:end;width:100%}
 @media(max-width:860px){
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:28px}
@@ -252,13 +253,13 @@ input[type=range]{width:100%;accent-color:var(--accent);height:28px;cursor:point
 .sw[aria-checked=true]::after{transform:translateX(24px);background:var(--accent)}
 .hv-state{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .hv-state b{font-family:var(--font-num);font-size:clamp(40px,5vw,60px);line-height:1;color:var(--faint);transition:color .2s,text-shadow .2s}
-.hv-state.on b{color:var(--accent);text-shadow:0 0 24px rgba(255,122,26,.45)}
+.hv-state.on b{color:var(--accent);text-shadow:0 0 24px rgba(255,138,26,.45)}
 .readout .meter{height:6px;border-radius:99px;background:var(--line);border:0;padding:0;overflow:hidden;margin-top:8px}
 .meter i{display:block;height:100%;width:0;background:var(--eco)}
 .rain-stage{padding:clamp(18px,2.4vw,26px);background:var(--bg);display:flex;flex-direction:column;gap:18px}
 .nodes{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .nodes .nd{font-family:var(--font-mono);font-size:12px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);color:var(--faint);background:var(--surface);transition:all .25s}
-.nodes .nd.on{border-color:var(--accent);color:var(--accent);box-shadow:0 0 14px rgba(255,122,26,.25)}
+.nodes .nd.on{border-color:var(--accent);color:var(--accent);box-shadow:0 0 14px rgba(255,138,26,.25)}
 .nodes .nd.sig.on{border-color:var(--eco);color:var(--eco);box-shadow:0 0 14px rgba(127,214,164,.2)}
 .nodes .nd.bad{border-color:var(--danger);color:var(--danger)}
 .nodes b{color:var(--faint);font-weight:400;font-size:12px}
@@ -281,12 +282,12 @@ input[type=range]{width:100%;accent-color:var(--accent);height:28px;cursor:point
 .logic .card h4 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
 
 /* ---------- 成果 ---------- */
-#results{background:radial-gradient(1200px 600px at 80% 0%,rgba(255,122,26,.08),transparent 60%),var(--bg)}
+#results{background:radial-gradient(1200px 600px at 80% 0%,rgba(255,138,26,.08),transparent 60%),var(--bg)}
 .kpi-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
 .kpi{grid-column:span 4;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;position:relative;overflow:hidden;min-height:260px}
 .kpi.wide{grid-column:span 8}
 .kpi.half{grid-column:span 6}
-.kpi.hero-kpi{border-color:rgba(255,122,26,.55);background:linear-gradient(150deg,rgba(255,122,26,.14),var(--surface) 55%)}
+.kpi.hero-kpi{border-color:rgba(255,138,26,.55);background:linear-gradient(150deg,rgba(255,138,26,.14),var(--surface) 55%)}
 @media(max-width:980px){.kpi,.kpi.wide,.kpi.half{grid-column:span 6}}
 @media(max-width:640px){.kpi,.kpi.wide,.kpi.half{grid-column:span 12}}
 .kpi .label{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -367,14 +368,124 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
 .lb.open{display:flex}
 .lb img{max-width:min(1200px,100%);max-height:82vh;border-radius:10px;background:#fff}
 .lb p{color:var(--muted);font-size:14px;text-align:center;max-width:800px}
+
+/* =========================================================
+   Showreel 風格：方格線底、HUD 外框、明體標題、等寬數字
+   ========================================================= */
+body{background-image:
+    linear-gradient(rgba(var(--l),.07) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--l),.07) 1px,transparent 1px),
+    linear-gradient(rgba(var(--l),.025) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--l),.025) 1px,transparent 1px);
+  background-size:140px 140px,140px 140px,28px 28px,28px 28px;background-attachment:fixed;line-height:1.85}
+h2{letter-spacing:.01em;line-height:1.2}
+.hero h1{letter-spacing:0;line-height:1.15;font-size:clamp(28px,4.3vw,66px)}
+.hero h1 .en{font-family:var(--font-mono);letter-spacing:.06em}
+.statement p{line-height:1.4}
+
+/* HUD */
+.hud{position:fixed;inset:0;pointer-events:none;z-index:40}
+.hud i{position:absolute;width:16px;height:16px;border:1px solid rgba(var(--l),.38)}
+.hud i:nth-child(1){top:14px;left:14px;border-right:0;border-bottom:0}
+.hud i:nth-child(2){top:14px;right:14px;border-left:0;border-bottom:0}
+.hud i:nth-child(3){bottom:14px;left:14px;border-right:0;border-top:0}
+.hud i:nth-child(4){bottom:14px;right:14px;border-left:0;border-top:0}
+.hud-fade{position:fixed;left:0;right:0;bottom:0;height:64px;z-index:38;pointer-events:none;background:linear-gradient(transparent,var(--bg) 72%)}
+.ruler{position:fixed;left:var(--gutter);right:var(--gutter);bottom:24px;height:9px;z-index:41;pointer-events:none;border-bottom:1px solid rgba(var(--l),.3);
+  background:repeating-linear-gradient(90deg,rgba(var(--l),.42) 0 1px,transparent 1px 8px) bottom/100% 4px no-repeat,
+             repeating-linear-gradient(90deg,rgba(var(--l),.5) 0 1px,transparent 1px 80px) bottom/100% 9px no-repeat}
+.ruler b{position:absolute;top:13px;left:0;width:0;height:0;border:5px solid transparent;border-bottom:8px solid var(--accent);border-top:0;transform:translateX(-5px)}
+.ruler span{position:absolute;right:0;bottom:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+@media(max-width:700px){.hud i{display:none}.ruler span{display:none}}
+.progress,.scroll-hint{display:none}
+footer{padding-bottom:110px}
+
+/* 導覽列 */
+.nav{padding:18px var(--gutter)}
+.brand{font-family:var(--font-mono);font-weight:500;letter-spacing:.16em;font-size:13px}
+.brand svg{width:20px;height:20px}
+.nav ul{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.12em}
+
+/* 標籤與方角 */
+.eyebrow{font-size:12px;letter-spacing:.2em;gap:10px}
+.eyebrow::before{width:8px;height:8px}
+.sim,.kpi,.btn,.seg,.nodes .nd,.serial,.chem,.code-params div,.checklist li,.readout div,.note,details,.tag,.loop span,.member .avatar,.sw,.sw::after,.bar .track,.bar .fill,.readout .meter,.menu-btn,.lb img{border-radius:2px}
+.tag{letter-spacing:.06em}
+.sw::after{border-radius:1px}
+
+/* 去掉發光與漸層 */
+.hero-photo .frame{box-shadow:none;border-color:rgba(255,138,26,.55)}
+#results{background:transparent}
+.formula.key{background:var(--surface)}
+.hv-state.on b{text-shadow:none}
+.nodes .nd.on,.nodes .nd.sig.on{box-shadow:none}
+figure .frame{background:transparent}
+figure .frame.dark{background:transparent}
+.lb{background:rgba(8,7,6,.95)}
+.lb img{background:var(--bg)}
+.sim{background:var(--surface)}
+.sim-stage,.rain-stage{background:rgba(0,0,0,.35)}
+.serial{background:rgba(0,0,0,.5)}
+
+/* 數字改等寬字後的字級修正 */
+.mega{font-size:clamp(56px,9.6vw,128px);letter-spacing:-.05em;font-weight:700}
+.hero-stats .num{font-size:clamp(34px,4.2vw,56px);letter-spacing:-.04em}
+.specs .v{letter-spacing:-.03em}
+.formula .eq{letter-spacing:-.02em;font-weight:500}
+.formula .eq i{font-style:normal}
+footer .big{letter-spacing:-.05em}
+.sdg .n{letter-spacing:-.05em}
+figcaption b,.table-cap b{letter-spacing:.06em}
+.member .name{font-weight:900}
+
+/* 實驗成果：左欄一個重點數字，右欄圖表 */
+.stage{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);padding:clamp(48px,7vw,96px) 0;border-top:1px solid var(--line);align-items:start}
+.stage:first-of-type{border-top-color:rgba(var(--l),.4)}
+@media(max-width:820px){.stage{grid-template-columns:minmax(0,1fr)}}
+.stage .no{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+.stage .no::before{content:"";width:8px;height:8px;background:var(--accent);flex:none}
+.stage h3{font-size:clamp(21px,2.3vw,28px);line-height:1.45;margin:14px 0 0}
+.stat{font-family:var(--font-num);font-weight:700;font-size:clamp(60px,8.2vw,112px);line-height:1;letter-spacing:-.05em;margin:28px 0 18px;white-space:nowrap;color:var(--accent)}
+.stat .u{font-size:.36em;letter-spacing:0;color:var(--text);margin-left:.12em}
+.stat .from{display:block;color:var(--faint);font-size:.3em;letter-spacing:0;margin-bottom:.4em}
+.stage p{color:var(--muted);max-width:31em}
+.stage>div>*+figure,.stage>div>*+.facts,.stage>div>*+.figs,.stage>div>*+.tbl{margin-top:32px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts>div{padding:18px 16px 18px 0}
+.facts>div+div{padding-left:16px;border-left:1px solid var(--line)}
+.facts .v{font-family:var(--font-num);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.1;letter-spacing:-.03em}
+.facts .v small{font-size:.55em;color:var(--accent);margin-left:4px;letter-spacing:0}
+.facts .v sup{font-size:.55em}
+.facts .k{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+@media(max-width:560px){.facts{grid-template-columns:minmax(0,1fr)}.facts>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl table{min-width:460px}
+.tbl th,.tbl td{background:transparent;padding:11px 12px 11px 0}
+.tbl th{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--faint);border-bottom:1px solid rgba(var(--l),.4)}
+.tbl td{color:var(--muted)}
+.tbl td:first-child{color:var(--text)}
+.tbl td.num,.tbl th.num{padding-right:0;padding-left:12px}
+.tbl tr.avg td{font-weight:700;color:var(--text);border-bottom:1px solid rgba(var(--l),.4)}
+.tbl tr:last-child td{border-bottom:1px solid var(--line)}
+.stage-end{border-top:1px solid var(--line);padding-top:clamp(48px,7vw,88px)}
+
+/* 條列：左欄短標籤、右欄一句話 */
+.points{list-style:none;border-top:1px solid var(--line);margin-top:18px}
+.points li{display:grid;grid-template-columns:minmax(0,7.5em) minmax(0,1fr);gap:18px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--muted);line-height:1.7}
+.points li b{color:var(--text);font-weight:700}
+.points li strong{color:var(--text)}
+@media(max-width:560px){.points li{grid-template-columns:minmax(0,1fr);gap:2px}}
+.issue p{line-height:1.75}
+ol.future li strong{color:var(--text)}
 </style>
 </head>
 <body>
 
 <div class="progress" id="progress"></div>
+<div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="hud-fade" aria-hidden="true"></div>
+<div class="ruler" aria-hidden="true"><b id="rulerMark"></b><span id="rulerLabel">00 / 06 — Intro</span></div>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="#top"><i></i>TRWP</a>
+  <a class="brand" href="#top"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="19" height="19" rx="4" stroke="currentColor" stroke-opacity=".7"/><rect x="5" y="5" width="2" height="10" fill="currentColor" fill-opacity=".6"/><rect x="9" y="5" width="2" height="10" fill="#ff8a1a"/><rect x="13" y="5" width="2" height="10" fill="currentColor" fill-opacity=".6"/></svg>TRWP</a>
   <button type="button" class="menu-btn" id="menuBtn" aria-label="開啟選單" aria-expanded="false" aria-controls="navList"><span></span></button>
   <ul id="navList">
     <li><a href="#problem">問題</a></li>
@@ -498,7 +609,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
   <div class="wrap">
     <div class="eyebrow reveal">02 — How It Works</div>
     <h2 class="reveal">不靠濾網擋，<br>用<span class="hl">電場</span>把微粒「拉」下來</h2>
-    <p class="lead reveal">本裝置的作動原理基於<strong>靜電集塵（Electrostatic Precipitation, ESP）</strong>技術：含微粒氣流通過施加高壓直流電的平行銅片極板時，微粒在強烈電場中發生極化或帶電，並受橫向庫侖力偏折、吸附於極板上。</p>
+    <p class="lead reveal">含微粒的氣流通過施加高壓直流電的平行銅片極板時，微粒受橫向庫侖力偏折、吸附於極板上——這就是<strong>靜電集塵（Electrostatic Precipitation, ESP）</strong>。</p>
 
     <div class="formula-row mt-m">
       <div class="formula reveal d1">
@@ -552,14 +663,18 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
           <button type="button" class="btn" id="espReset">回到報告設定：15 kV / 17 mm</button>
         </div>
       </div>
-      <div class="sim-foot">F₀ 為報告設定（15 kV、17 mm）下的受力。導電性微粒接觸極板即可迅速取得電荷、質量又小，較易被偏折吸附；礦物顆粒荷電較慢、質量較大，多半直接穿越通道（此篩選效果尚待對照實驗驗證）。動畫僅用來說明 F = qV/d 的趨勢，捕捉比例請以實驗成果段落為準。</div>
+      <div class="sim-foot">動畫僅用來說明 F = qV/d 的趨勢，非實測數據；F₀ 為報告設定（15 kV、17 mm）下的受力。導電微粒與礦物顆粒的差異尚待對照實驗驗證。</div>
     </div>
 
     <div class="split mt-l">
       <div class="reveal">
         <h3>微粒如何帶電？為什麼 TRWP 較易被抓？</h3>
-        <p class="muted">本裝置<strong>未設置電暈放電極</strong>，微粒的電荷主要來自兩處：輪胎摩擦過程產生的<strong>靜電</strong>，以及接觸極板時的<strong>傳導荷電</strong>——導電性微粒一碰到極板，就能迅速取得與極板同極性的電荷；絕緣性微粒的電荷轉移則相對緩慢。這種導體與非導體間的荷電差異，正是工業上<strong>靜電分選</strong>（electrostatic separation）的基本原理。</p>
-        <p class="muted">TRWP 的橡膠基體含有<strong>碳黑</strong>等導電填料，其中粒徑較小的部分（如 PM10 以下之可懸浮微粒）質量小、慣性弱，較易在 <strong>17 mm</strong> 的極板間距內被 <strong>15 kV</strong> 電場偏折並捕獲；導電性較差、粒徑較大的礦物顆粒則以慣性為主，較易直接穿越通道。據此推論，裝置具備依成分與粒徑篩選微粒的<strong>潛力</strong>，惟尚待以絕緣性替代粉體進行對照實驗驗證。</p>
+        <ul class="points">
+          <li><b>電荷來源</b><span>本裝置<strong>未設電暈放電極</strong>；電荷來自輪胎摩擦產生的靜電，以及接觸極板時的傳導荷電。</span></li>
+          <li><b>導電微粒</b><span>一碰到極板就取得同極性電荷。TRWP 含<strong>碳黑</strong>等導電填料，粒徑小者易在 17 mm 間距內被 15 kV 電場偏折捕獲。</span></li>
+          <li><b>絕緣顆粒</b><span>電荷轉移緩慢；粒徑較大的礦物顆粒以慣性為主，多半直接穿越通道。</span></li>
+          <li><b>尚待驗證</b><span>此荷電差異即工業上<strong>靜電分選</strong>的原理；裝置能否依成分與粒徑篩選微粒，仍須以絕緣性替代粉體做對照實驗。</span></li>
+        </ul>
       </div>
       <figure class="reveal d1">
         <div class="frame"><img src="images/draw/fig02.svg" width="760" height="430" alt="帶電粒子於平行板均勻電場中的受力分析" loading="lazy"></div>
@@ -582,101 +697,6 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       <p class="small mt-s reveal">＊15 kV 為升壓模組製造商標示之輸出規格，本研究未以高壓探棒實測。</p>
     </div>
 
-    <div class="mt-l">
-      <h3 class="reveal">電路架構</h3>
-      <p class="muted reveal" style="max-width:780px">電路由兩條迴路組成：<strong>高壓電力路徑</strong>把市電逐級升到 15 kV 送上極板；<strong>雨滴感測器模組</strong>是低壓訊號迴路，電源從手動開關後方分出、降壓至 5 V 供應，並透過繼電器的 IN 端控制 COM 與 NO 的通斷，下雨時自動切斷高壓。</p>
-      <div class="circuit mt-s reveal d1">
-        <p class="sr-only">電路方塊圖：110 V 市電經變壓器降為 12 V，依序通過 2 A 保險絲、手動開關、繼電器（COM→NO），再由升壓線圈升到 15 kV 送至銅片極板。在手動開關與繼電器之間分出一條線，降壓至 5 V 後供電給雨滴感測器、Arduino 與繼電器模組；雨滴感測器訊號送入 Arduino，Arduino 再由 D7 控制繼電器 IN 端。</p>
-
-        <!-- 桌面版方塊圖 -->
-        <svg class="cdiag cdiag-wide" viewBox="0 0 1000 312" aria-hidden="true">
-          <defs>
-            <marker id="dA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
-            <marker id="dH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-hot" d="M0,0 L10,5 L0,10 z"/></marker>
-            <marker id="dE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-eco" d="M0,0 L10,5 L0,10 z"/></marker>
-          </defs>
-          <!-- 主電力路徑 -->
-          <path class="w" d="M128,67 H146" marker-end="url(#dA)"/>
-          <path class="w" d="M266,67 H284" marker-end="url(#dA)"/>
-          <path class="w" d="M404,67 H422" marker-end="url(#dA)"/>
-          <path class="w" d="M542,67 H590" marker-end="url(#dA)"/>
-          <path class="w w-hot" d="M710,67 H728" marker-end="url(#dH)"/>
-          <path class="w w-hot" d="M848,67 H866" marker-end="url(#dH)"/>
-          <!-- 手動開關後分線 → 降壓 5 V -->
-          <path class="w-5v" d="M567,67 V143" marker-end="url(#dE)"/>
-          <path class="w-5v" d="M567,191 V222 M470,222 H640 M470,222 V248 M640,222 V248"/>
-          <path class="w-5v" d="M470,236 V248" marker-end="url(#dE)"/>
-          <path class="w-5v" d="M640,236 V248" marker-end="url(#dE)"/>
-          <!-- 控制訊號 -->
-          <path class="w-sig" d="M540,273 H608" marker-end="url(#dE)"/>
-          <path class="w-sig" d="M690,250 V96" marker-end="url(#dE)"/>
-          <text class="lbl" x="574" y="266">D0→D2</text>
-          <text class="lbl" x="698" y="206" style="text-anchor:start">D7 → IN</text>
-          <!-- 分線點 -->
-          <circle class="jn-ring" cx="567" cy="67" r="12"/>
-          <circle class="jn" cx="567" cy="67" r="6"/>
-          <text class="call" x="554" y="116">① 從手動開關後方分出一條線</text>
-          <text class="call" x="474" y="173">② 降壓至 5 V，供電給 Arduino、雨滴感測器、繼電器模組</text>
-          <!-- 節點 -->
-          <g class="n"><rect x="10" y="40" width="118" height="54" rx="9"/><text class="t" x="69" y="63">110 V 市電</text><text class="s" x="69" y="81">市電輸入</text></g>
-          <g class="n"><rect x="148" y="40" width="118" height="54" rx="9"/><text class="t" x="207" y="63">變壓器</text><text class="s" x="207" y="81">110 V → 12 V</text></g>
-          <g class="n"><rect x="286" y="40" width="118" height="54" rx="9"/><text class="t" x="345" y="63">保險絲</text><text class="s" x="345" y="81">2 A 過電流保護</text></g>
-          <g class="n sw"><rect x="424" y="40" width="118" height="54" rx="9"/><text class="t" x="483" y="63">手動開關</text><text class="s" x="483" y="81">人工總開關</text></g>
-          <g class="n sw"><rect x="592" y="40" width="118" height="54" rx="9"/><text class="t" x="651" y="63">繼電器</text><text class="s" x="651" y="81">COM → NO</text></g>
-          <g class="n hot"><rect x="730" y="40" width="118" height="54" rx="9"/><text class="t" x="789" y="63">升壓線圈</text><text class="s" x="789" y="81">12 V → 15 kV</text></g>
-          <g class="n hot"><rect x="868" y="40" width="118" height="54" rx="9"/><text class="t" x="927" y="63">銅片極板</text><text class="s" x="927" y="81">15 kV 電場</text></g>
-          <g class="n lv"><rect x="487" y="145" width="160" height="46" rx="9"/><text class="t" x="567" y="165">降壓 5 V</text><text class="s" x="567" y="182">低壓控制電路供電</text></g>
-          <g class="n lv"><rect x="400" y="250" width="140" height="46" rx="9"/><text class="t" x="470" y="270">雨滴感測器</text><text class="s" x="470" y="287">偵測降雨（D0）</text></g>
-          <g class="n lv"><rect x="610" y="250" width="140" height="46" rx="9"/><text class="t" x="680" y="270">Arduino</text><text class="s" x="680" y="287">判斷並控制繼電器</text></g>
-        </svg>
-
-        <!-- 手機版方塊圖（直式） -->
-        <svg class="cdiag cdiag-tall" viewBox="0 0 364 506" aria-hidden="true">
-          <defs>
-            <marker id="mA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
-            <marker id="mH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-hot" d="M0,0 L10,5 L0,10 z"/></marker>
-            <marker id="mE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-eco" d="M0,0 L10,5 L0,10 z"/></marker>
-          </defs>
-          <path class="w" d="M89,54 V72" marker-end="url(#mA)"/>
-          <path class="w" d="M89,118 V136" marker-end="url(#mA)"/>
-          <path class="w" d="M89,182 V200" marker-end="url(#mA)"/>
-          <path class="w" d="M89,246 V302" marker-end="url(#mA)"/>
-          <path class="w w-hot" d="M89,348 V366" marker-end="url(#mH)"/>
-          <path class="w w-hot" d="M89,412 V430" marker-end="url(#mH)"/>
-          <path class="w-5v" d="M89,275 H271 V302" marker-end="url(#mE)"/>
-          <path class="w-5v" d="M271,348 V378" marker-end="url(#mE)"/>
-          <path class="w-5v" d="M346,326 H356 V478 H348" marker-end="url(#mE)"/>
-          <path class="w-sig" d="M236,424 V454" marker-end="url(#mE)"/>
-          <path class="w-sig" d="M196,478 H180 V326 H166" marker-end="url(#mE)"/>
-          <circle class="jn-ring" cx="89" cy="275" r="11"/>
-          <circle class="jn" cx="89" cy="275" r="5.5"/>
-          <text class="call" x="186" y="267" style="text-anchor:middle">從手動開關後分出</text>
-          <g class="n"><rect x="14" y="10" width="150" height="44" rx="9"/><text class="t" x="89" y="30">110 V 市電</text><text class="s" x="89" y="46">市電輸入</text></g>
-          <g class="n"><rect x="14" y="74" width="150" height="44" rx="9"/><text class="t" x="89" y="94">變壓器</text><text class="s" x="89" y="110">110 V → 12 V</text></g>
-          <g class="n"><rect x="14" y="138" width="150" height="44" rx="9"/><text class="t" x="89" y="158">保險絲</text><text class="s" x="89" y="174">2 A 過電流保護</text></g>
-          <g class="n sw"><rect x="14" y="202" width="150" height="44" rx="9"/><text class="t" x="89" y="222">手動開關</text><text class="s" x="89" y="238">人工總開關</text></g>
-          <g class="n sw"><rect x="14" y="304" width="150" height="44" rx="9"/><text class="t" x="89" y="324">繼電器</text><text class="s" x="89" y="340">COM → NO</text></g>
-          <g class="n hot"><rect x="14" y="368" width="150" height="44" rx="9"/><text class="t" x="89" y="388">升壓線圈</text><text class="s" x="89" y="404">12 V → 15 kV</text></g>
-          <g class="n hot"><rect x="14" y="432" width="150" height="44" rx="9"/><text class="t" x="89" y="452">銅片極板</text><text class="s" x="89" y="468">15 kV 電場</text></g>
-          <g class="n lv"><rect x="196" y="304" width="150" height="44" rx="9"/><text class="t" x="271" y="324">降壓 5 V</text><text class="s" x="271" y="340">低壓控制電路供電</text></g>
-          <g class="n lv"><rect x="196" y="380" width="150" height="44" rx="9"/><text class="t" x="271" y="400">雨滴感測器</text><text class="s" x="271" y="416">偵測降雨（D0）</text></g>
-          <g class="n lv"><rect x="196" y="456" width="150" height="44" rx="9"/><text class="t" x="271" y="476">Arduino</text><text class="s" x="271" y="492">D7 → 繼電器 IN</text></g>
-        </svg>
-
-        <div class="clegend">
-          <span><i class="lg-m"></i>市電／12 V 電力路徑</span>
-          <span><i class="lg-h"></i>15 kV 高壓</span>
-          <span><i class="lg-5"></i>5 V 分支供電（手動開關後分出）</span>
-          <span><i class="lg-s"></i>控制訊號</span>
-        </div>
-        <div class="grid g3 mt-s circuit-notes">
-          <p class="small"><strong>乾燥</strong>：D7 輸出觸發電位（低電位觸發），繼電器吸合、NO 導通，15 kV 正常運作。</p>
-          <p class="small"><strong>偵測到水</strong>：繼電器即時斷電，高壓關閉；停雨後經 DRY_DELAY 延遲才復電。</p>
-          <p class="small"><strong>手動開關</strong>：串接在繼電器 COM 端之前，關閉時直接切斷高壓，Arduino、感測器與繼電器模組也一併斷電，優先權最高。</p>
-        </div>
-      </div>
-      <p class="small mt-s reveal">完整電路方塊圖見 <a href="#rain" class="hl">3.2 雨滴感測器安全保護模組</a>（圖七）。</p>
-    </div>
   </div>
 </section>
 
@@ -685,23 +705,27 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
   <div class="wrap">
     <div class="eyebrow reveal">03 — The Device</div>
     <h2 class="reveal">從草圖到實機</h2>
-    <p class="lead reveal">本專題著重實體機構設計與機電系統整合：外殼可搭載於輪轂馬達後方，同時考量氣流導引與高壓絕緣需求，以降低車輛高頻振動與潮濕環境下發生沿面漏電或極板跳火（Arc Discharge）之風險。</p>
+    <p class="lead reveal">外殼可搭載於輪轂馬達後方，設計重點是<strong>氣流導引</strong>與<strong>高壓絕緣</strong>：避免車輛振動與潮濕環境下發生沿面漏電或極板跳火。</p>
 
     <div class="split mt-m">
       <figure class="reveal">
-        <div class="frame"><img src="images/draw/fig05.svg" width="780" height="570" alt="靜電捕捉裝置之雛形：白色 PLA 外殼與四片銅片極板" loading="lazy"></div>
+        <div class="frame"><img src="images/fig05.png" width="462" height="480" alt="靜電捕捉裝置之雛形：白色 PLA 外殼與四片銅片極板" loading="lazy"></div>
         <figcaption><b>圖五</b>靜電捕捉裝置之雛形</figcaption>
       </figure>
       <div class="reveal d1">
         <h3>機構設計</h3>
-        <p class="muted">PLA 3D 列印外殼 × 尼龍絕緣柱定距 × 熱熔膠封裝。尼龍柱維持極板間距，防止結構因外界撞擊或馬達高頻振動而變形移位；高壓端子壓接後以尼龍柱與螺帽鎖於銅片上。</p>
+        <ul class="points">
+          <li><b>外殼</b><span>PLA 3D 列印成型，以 Autodesk Inventor 建模。</span></li>
+          <li><b>極板定距</b><span>尼龍絕緣柱維持 17 mm 間距，防止撞擊或馬達振動造成變形移位。</span></li>
+          <li><b>高壓絕緣</b><span>高壓端子壓接後以尼龍柱與螺帽鎖於銅片，裸露處灌注熱熔膠封裝。</span></li>
+        </ul>
         <div class="grid g2 mt-s">
           <figure>
-            <div class="frame"><img src="images/draw/fig03.svg" width="840" height="500" alt="捕捉裝置設計草圖，標示 17 mm 間距" loading="lazy"></div>
+            <div class="frame"><img src="images/fig03.png" width="772" height="615" alt="捕捉裝置設計草圖，標示 17 mm 間距" loading="lazy"></div>
             <figcaption><b>圖三</b>捕捉裝置設計草圖</figcaption>
           </figure>
           <figure>
-            <div class="frame"><img src="images/draw/fig04.svg" width="960" height="430" alt="升壓線圈、變壓器與銅片" loading="lazy"></div>
+            <div class="frame"><img src="images/fig04.jpg" width="1600" height="900" alt="升壓線圈、變壓器與銅片" loading="lazy"></div>
             <figcaption><b>圖四</b>由左至右：12 V→15 kV 升壓線圈、110 V→12 V 變壓器、銅片</figcaption>
           </figure>
         </div>
@@ -715,10 +739,100 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       <p class="muted reveal" style="max-width:780px">15 kV 高壓若在潮濕環境下持續通電，可能導致沿面漏電或電弧放電。雨滴感測器偵測降雨 → Arduino 判讀 → 控制繼電器，偵測到降雨時<strong>自動切斷高壓電場供電</strong>。</p>
       <p class="small reveal" style="max-width:780px">應用限制：降雨期間路面揚塵雖顯著減少，但此時 TRWP 多隨路面逕流進入排水系統，已非本裝置所能處理之範圍。</p>
 
-      <div class="logic mt-s">
-        <div class="card reveal d1"><h4><span class="dot" style="background:var(--eco)"></span>乾燥 ＋ 手動開關開啟</h4><p class="small">Arduino D7 輸出觸發電位（低電位觸發），繼電器吸合、NO 導通，15 kV 電場正常運作。</p></div>
-        <div class="card reveal d2"><h4><span class="dot" style="background:var(--accent)"></span>偵測降雨 / Arduino 異常</h4><p class="small">繼電器釋放、NO 斷開，高壓隨即關閉；停雨後須經延遲時間才重新供電，避免殘留濕氣誤動作。</p></div>
-        <div class="card reveal d3"><h4><span class="dot" style="background:var(--danger)"></span>手動開關關閉</h4><p class="small">最高優先權：無論繼電器狀態，電源於實體電路上即被直接切斷；Arduino 與感測器的電源也取自手動開關後方，會一併斷電。</p></div>
+      <div class="mt-m">
+        <h4 class="reveal">電路架構</h4>
+        <p class="muted reveal" style="max-width:780px;font-size:15px"><strong>高壓電力路徑</strong>把市電逐級升到 15 kV；<strong>低壓訊號迴路</strong>由手動開關後方分出 5 V，經繼電器 IN 端控制通斷，下雨時自動切斷高壓。</p>
+        <div class="circuit mt-s reveal d1">
+          <p class="sr-only">電路方塊圖：110 V 市電經變壓器降為 12 V，依序通過 2 A 保險絲、手動開關、繼電器（COM→NO），再由升壓線圈升到 15 kV 送至銅片極板。在手動開關與繼電器之間分出一條線，降壓至 5 V 後供電給雨滴感測器、Arduino 與繼電器模組；雨滴感測器訊號送入 Arduino，Arduino 再由 D7 控制繼電器 IN 端。</p>
+
+          <!-- 桌面版方塊圖 -->
+          <svg class="cdiag cdiag-wide" viewBox="0 0 1000 312" aria-hidden="true">
+            <defs>
+              <marker id="dA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="dH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-hot" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="dE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-eco" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <!-- 主電力路徑 -->
+            <path class="w" d="M128,67 H146" marker-end="url(#dA)"/>
+            <path class="w" d="M266,67 H284" marker-end="url(#dA)"/>
+            <path class="w" d="M404,67 H422" marker-end="url(#dA)"/>
+            <path class="w" d="M542,67 H590" marker-end="url(#dA)"/>
+            <path class="w w-hot" d="M710,67 H728" marker-end="url(#dH)"/>
+            <path class="w w-hot" d="M848,67 H866" marker-end="url(#dH)"/>
+            <!-- 手動開關後分線 → 降壓 5 V -->
+            <path class="w-5v" d="M567,67 V143" marker-end="url(#dE)"/>
+            <path class="w-5v" d="M567,191 V222 M470,222 H640 M470,222 V248 M640,222 V248"/>
+            <path class="w-5v" d="M470,236 V248" marker-end="url(#dE)"/>
+            <path class="w-5v" d="M640,236 V248" marker-end="url(#dE)"/>
+            <!-- 控制訊號 -->
+            <path class="w-sig" d="M540,273 H608" marker-end="url(#dE)"/>
+            <path class="w-sig" d="M690,250 V96" marker-end="url(#dE)"/>
+            <text class="lbl" x="574" y="266">D0→D2</text>
+            <text class="lbl" x="698" y="206" style="text-anchor:start">D7 → IN</text>
+            <!-- 分線點 -->
+            <circle class="jn-ring" cx="567" cy="67" r="12"/>
+            <circle class="jn" cx="567" cy="67" r="6"/>
+            <text class="call" x="554" y="116">① 從手動開關後方分出一條線</text>
+            <text class="call" x="474" y="173">② 降壓至 5 V，供電給 Arduino、雨滴感測器、繼電器模組</text>
+            <!-- 節點 -->
+            <g class="n"><rect x="10" y="40" width="118" height="54" rx="9"/><text class="t" x="69" y="63">110 V 市電</text><text class="s" x="69" y="81">市電輸入</text></g>
+            <g class="n"><rect x="148" y="40" width="118" height="54" rx="9"/><text class="t" x="207" y="63">變壓器</text><text class="s" x="207" y="81">110 V → 12 V</text></g>
+            <g class="n"><rect x="286" y="40" width="118" height="54" rx="9"/><text class="t" x="345" y="63">保險絲</text><text class="s" x="345" y="81">2 A 過電流保護</text></g>
+            <g class="n sw"><rect x="424" y="40" width="118" height="54" rx="9"/><text class="t" x="483" y="63">手動開關</text><text class="s" x="483" y="81">人工總開關</text></g>
+            <g class="n sw"><rect x="592" y="40" width="118" height="54" rx="9"/><text class="t" x="651" y="63">繼電器</text><text class="s" x="651" y="81">COM → NO</text></g>
+            <g class="n hot"><rect x="730" y="40" width="118" height="54" rx="9"/><text class="t" x="789" y="63">升壓線圈</text><text class="s" x="789" y="81">12 V → 15 kV</text></g>
+            <g class="n hot"><rect x="868" y="40" width="118" height="54" rx="9"/><text class="t" x="927" y="63">銅片極板</text><text class="s" x="927" y="81">15 kV 電場</text></g>
+            <g class="n lv"><rect x="487" y="145" width="160" height="46" rx="9"/><text class="t" x="567" y="165">降壓 5 V</text><text class="s" x="567" y="182">低壓控制電路供電</text></g>
+            <g class="n lv"><rect x="400" y="250" width="140" height="46" rx="9"/><text class="t" x="470" y="270">雨滴感測器</text><text class="s" x="470" y="287">偵測降雨（D0）</text></g>
+            <g class="n lv"><rect x="610" y="250" width="140" height="46" rx="9"/><text class="t" x="680" y="270">Arduino</text><text class="s" x="680" y="287">判斷並控制繼電器</text></g>
+          </svg>
+
+          <!-- 手機版方塊圖（直式） -->
+          <svg class="cdiag cdiag-tall" viewBox="0 0 364 506" aria-hidden="true">
+            <defs>
+              <marker id="mA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="mH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-hot" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="mE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-eco" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <path class="w" d="M89,54 V72" marker-end="url(#mA)"/>
+            <path class="w" d="M89,118 V136" marker-end="url(#mA)"/>
+            <path class="w" d="M89,182 V200" marker-end="url(#mA)"/>
+            <path class="w" d="M89,246 V302" marker-end="url(#mA)"/>
+            <path class="w w-hot" d="M89,348 V366" marker-end="url(#mH)"/>
+            <path class="w w-hot" d="M89,412 V430" marker-end="url(#mH)"/>
+            <path class="w-5v" d="M89,275 H271 V302" marker-end="url(#mE)"/>
+            <path class="w-5v" d="M271,348 V378" marker-end="url(#mE)"/>
+            <path class="w-5v" d="M346,326 H356 V478 H348" marker-end="url(#mE)"/>
+            <path class="w-sig" d="M236,424 V454" marker-end="url(#mE)"/>
+            <path class="w-sig" d="M196,478 H180 V326 H166" marker-end="url(#mE)"/>
+            <circle class="jn-ring" cx="89" cy="275" r="11"/>
+            <circle class="jn" cx="89" cy="275" r="5.5"/>
+            <text class="call" x="186" y="267" style="text-anchor:middle">從手動開關後分出</text>
+            <g class="n"><rect x="14" y="10" width="150" height="44" rx="9"/><text class="t" x="89" y="30">110 V 市電</text><text class="s" x="89" y="46">市電輸入</text></g>
+            <g class="n"><rect x="14" y="74" width="150" height="44" rx="9"/><text class="t" x="89" y="94">變壓器</text><text class="s" x="89" y="110">110 V → 12 V</text></g>
+            <g class="n"><rect x="14" y="138" width="150" height="44" rx="9"/><text class="t" x="89" y="158">保險絲</text><text class="s" x="89" y="174">2 A 過電流保護</text></g>
+            <g class="n sw"><rect x="14" y="202" width="150" height="44" rx="9"/><text class="t" x="89" y="222">手動開關</text><text class="s" x="89" y="238">人工總開關</text></g>
+            <g class="n sw"><rect x="14" y="304" width="150" height="44" rx="9"/><text class="t" x="89" y="324">繼電器</text><text class="s" x="89" y="340">COM → NO</text></g>
+            <g class="n hot"><rect x="14" y="368" width="150" height="44" rx="9"/><text class="t" x="89" y="388">升壓線圈</text><text class="s" x="89" y="404">12 V → 15 kV</text></g>
+            <g class="n hot"><rect x="14" y="432" width="150" height="44" rx="9"/><text class="t" x="89" y="452">銅片極板</text><text class="s" x="89" y="468">15 kV 電場</text></g>
+            <g class="n lv"><rect x="196" y="304" width="150" height="44" rx="9"/><text class="t" x="271" y="324">降壓 5 V</text><text class="s" x="271" y="340">低壓控制電路供電</text></g>
+            <g class="n lv"><rect x="196" y="380" width="150" height="44" rx="9"/><text class="t" x="271" y="400">雨滴感測器</text><text class="s" x="271" y="416">偵測降雨（D0）</text></g>
+            <g class="n lv"><rect x="196" y="456" width="150" height="44" rx="9"/><text class="t" x="271" y="476">Arduino</text><text class="s" x="271" y="492">D7 → 繼電器 IN</text></g>
+          </svg>
+
+          <div class="clegend">
+            <span><i class="lg-m"></i>市電／12 V 電力路徑</span>
+            <span><i class="lg-h"></i>15 kV 高壓</span>
+            <span><i class="lg-5"></i>5 V 分支供電（手動開關後分出）</span>
+            <span><i class="lg-s"></i>控制訊號</span>
+          </div>
+          <div class="grid g3 mt-s circuit-notes">
+            <p class="small"><strong>乾燥</strong>：D7 輸出觸發電位（低電位觸發），繼電器吸合、NO 導通，15 kV 正常運作。</p>
+            <p class="small"><strong>偵測到水</strong>：繼電器即時斷電，高壓關閉；停雨後經 DRY_DELAY 延遲才復電。</p>
+            <p class="small"><strong>手動開關</strong>：串接在繼電器 COM 端之前，關閉時直接切斷高壓，Arduino、感測器與繼電器模組也一併斷電，優先權最高。</p>
+          </div>
+        </div>
+        <p class="table-cap reveal"><b>圖七</b>雨滴感測器安全保護模組完整電路方塊圖</p>
       </div>
 
       <div class="sim mt-m reveal" id="rainSim">
@@ -783,7 +897,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       <div class="split mt-m">
         <div class="reveal">
           <h4>為什麼選 NO（常開）接點？</h4>
-          <p class="muted" style="font-size:15px">故障安全（fail-safe）：當 Arduino 當機、電源異常或訊號線鬆脫時，繼電器線圈失去磁力，簧片自動彈回斷開位置，<strong>高壓電場隨之自動關閉</strong>。若採 NC 接點，控制電路故障時高壓反而持續開啟。</p>
+          <p class="muted" style="font-size:15px">故障安全（fail-safe）：Arduino 當機、電源異常或訊號線鬆脫時，繼電器線圈失磁、簧片彈回，<strong>高壓自動關閉</strong>。若採 NC 接點，故障時高壓反而持續開啟。</p>
           <h4 class="mt-m">麵包板驗收結果 <span class="cite">表一</span></h4>
           <ul class="checklist mt-s">
             <li><span class="i">01</span><div>開機（乾燥狀態）<small>繼電器通電，15 kV 正常運作</small></div><span class="tag ok">通過</span></li>
@@ -793,21 +907,20 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
           </ul>
         </div>
         <figure class="reveal d1">
-          <div class="frame"><img src="images/draw/fig07.svg" width="970" height="350" alt="雨滴感測器安全保護模組完整電路方塊圖" loading="lazy"></div>
-          <figcaption><b>圖七</b>雨滴感測器安全保護模組完整電路方塊圖</figcaption>
+          <div class="frame"><img src="images/draw/fig08.svg" width="640" height="300" alt="繼電器 NO/NC 接點選用理由" loading="lazy"></div>
+          <figcaption><b>圖八</b>繼電器 NO／NC 接點選用理由之邏輯示意</figcaption>
         </figure>
       </div>
 
-      <div class="grid g3 mt-m">
-        <figure class="reveal"><div class="frame"><img src="images/draw/fig08.svg" width="640" height="300" alt="繼電器 NO/NC 接點選用理由" loading="lazy"></div><figcaption><b>圖八</b>繼電器 NO／NC 接點選用理由之邏輯示意</figcaption></figure>
-        <figure class="reveal d1"><div class="frame"><img src="images/draw/fig10.svg" width="960" height="580" alt="麵包板實體接線" loading="lazy"></div><figcaption><b>圖十</b>雨滴感測器安全保護模組之麵包板實體接線</figcaption></figure>
-        <figure class="reveal d2"><div class="frame"><img src="images/draw/fig11.svg" width="820" height="476" alt="序列埠監控紀錄" loading="lazy"></div><figcaption><b>圖十一</b>序列埠監控紀錄（左：乾燥持續通電；右：偵測降雨後斷電並延遲等待）</figcaption></figure>
+      <div class="grid g2 mt-m">
+        <figure class="reveal"><div class="frame"><img src="images/fig10.jpg" width="1400" height="812" alt="麵包板實體接線" loading="lazy"></div><figcaption><b>圖十</b>雨滴感測器安全保護模組之麵包板實體接線</figcaption></figure>
+        <figure class="reveal d1"><div class="frame"><img src="images/fig11.jpg" width="652" height="518" alt="序列埠監控紀錄" loading="lazy"></div><figcaption><b>圖十一</b>序列埠監控紀錄（左：乾燥持續通電；右：偵測降雨後斷電並延遲等待）</figcaption></figure>
       </div>
 
       <div class="split mt-m" style="align-items:start">
         <div class="reveal">
           <h4>Arduino 程式實作</h4>
-          <p class="muted" style="font-size:15px">系統上電後先將繼電器設為斷電，確保開機時高壓不會誤啟動；<code>loop()</code> 每 300 ms 讀取一次感測器：偵測到水即記錄時間並斷電，停雨超過 DRY_DELAY 才恢復通電，其餘情況維持斷電並輸出等待訊息。</p>
+          <p class="muted" style="font-size:15px">開機先斷電，確保高壓不會誤啟動；之後每 300 ms 讀取一次感測器：偵測到水即斷電，停雨超過 DRY_DELAY 才復電。</p>
           <div class="code-params mt-s">
             <div><code>RAIN_D0 = 2</code><span>雨滴感測器數位輸出接 D2</span></div>
             <div><code>RELAY_PIN = 7</code><span>繼電器控制訊號接 D7</span></div>
@@ -834,7 +947,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       <div class="reveal d1">
         <div class="tag">3.3</div>
         <h3 class="mt-s">集塵盒回收機構</h3>
-        <p class="muted">於極板匣下方增設集塵盒空間，外殼底部開設可抽取之開闔式閘門，測試後可直接取出集塵盒秤重或送驗。極板匣可<strong>整組自外殼抽出</strong>，回收粉塵時無須拆解單片極板，亦便於整批秤重以核算累積捕捉量。</p>
+        <p class="muted">極板匣下方設集塵盒，外殼底部有可抽取的閘門。極板匣可<strong>整組自外殼抽出</strong>，回收粉塵不必拆解單片極板，也方便整批秤重或送驗。</p>
         <p class="small">現階段僅支援停駛後人工刮除；後續可朝機械敲擊（rapping）或輔助低壓電暈之自動化方向擴充。</p>
       </div>
     </div>
@@ -842,12 +955,19 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
     <!-- 實驗平台 -->
     <div class="mt-l">
       <h3 class="reveal">動態模擬平台</h3>
-      <p class="muted reveal" style="max-width:780px">基於專題預算與設計難度考量，選用電動腳踏車之驅動輪（48 V 輪轂馬達）架設於專用支架上，將靜電捕捉裝置鎖固於馬達後方，模擬摩擦時粉塵隨氣流發散之位置。</p>
-      <p class="muted reveal" style="max-width:780px">底部木板正中央鋪設 <strong>#60 砂紙</strong>，兩側以 30 cm 角鋼將車輪與馬達鎖固於輪徑一半高度；鎖固點下方再各接一支朝後下方 −45° 之角鋼，末端木板即為捕捉裝置與集塵盒之安裝平台。初期曾以柏油路面作為摩擦介質，惟產生之粉塵量過少、難以量化，故改用砂紙；另因供電變壓器曾於高負載下損壞，最終統一以最高轉速 350 RPM 測試，單次運轉時間上限設為 30 秒。</p>
-      <figure class="reveal mt-s" style="max-width:760px"><div class="frame"><img src="images/draw/fig06.svg" width="900" height="500" alt="輪轂馬達模組" loading="lazy"></div><figcaption><b>圖六</b>用於模擬之輪轂馬達模組</figcaption></figure>
+      <p class="muted reveal" style="max-width:780px">以電動腳踏車驅動輪（48 V 輪轂馬達）搭建，捕捉裝置鎖固於馬達後方，模擬摩擦時粉塵隨氣流發散的位置。</p>
+      <div class="reveal" style="max-width:780px">
+        <ul class="points">
+          <li><b>摩擦介質</b><span><strong>#60 砂紙</strong>鋪於底板中央。初期試過柏油路面，粉塵量過少、難以量化。</span></li>
+          <li><b>車輪固定</b><span>兩側 30 cm 角鋼將車輪與馬達鎖固於輪徑一半高度。</span></li>
+          <li><b>裝置位置</b><span>鎖固點下方另接朝後下方 −45° 的角鋼，末端木板為捕捉裝置與集塵盒的安裝平台。</span></li>
+          <li><b>測試條件</b><span>統一以最高轉速 350 RPM 測試，單次上限 30 秒（變壓器曾因高負載損壞）。</span></li>
+        </ul>
+      </div>
+      <figure class="reveal mt-s"><div class="frame"><img src="images/fig06.jpg" width="1824" height="722" alt="輪轂馬達模組" loading="lazy"></div><figcaption><b>圖六</b>用於模擬之輪轂馬達模組</figcaption></figure>
       <div class="grid g2 mt-s" style="align-items:start">
-        <figure class="reveal d1"><div class="frame"><img src="images/draw/fig16.svg" width="580" height="720" alt="動態摩擦測試之輪轂馬達實驗平台架設情形" loading="lazy"></div><figcaption><b>圖十六</b>動態摩擦測試之輪轂馬達實驗平台架設情形（正視）</figcaption></figure>
-        <figure class="reveal d2"><div class="frame"><img src="images/draw/fig17.svg" width="880" height="660" alt="動態摩擦測試實驗裝置：輪胎下方鋪設砂紙，兩側白色角鋼固定輪轂馬達，向後下方延伸之角鋼末端安裝捕捉裝置" loading="lazy"></div><figcaption><b>圖十七</b>動態摩擦測試實驗裝置之整體架設（側視；輪胎下方鋪設 #60 砂紙；向後下方延伸之角鋼末端為捕捉裝置與集塵盒之安裝位置）</figcaption></figure>
+        <figure class="reveal d1"><div class="frame"><img src="images/fig16.jpg" width="577" height="937" alt="動態摩擦測試之輪轂馬達實驗平台架設情形" loading="lazy"></div><figcaption><b>圖十六</b>動態摩擦測試之輪轂馬達實驗平台架設情形</figcaption></figure>
+        <figure class="reveal d2"><div class="frame"><img src="images/fig17.jpg" width="1200" height="1250" alt="動態摩擦測試實驗裝置：輪胎下方鋪設砂紙，兩側白色角鋼固定輪轂馬達，向後下方延伸之角鋼末端安裝捕捉裝置" loading="lazy"></div><figcaption><b>圖十七</b>動態摩擦測試實驗裝置之整體架設（輪胎下方鋪設 #60 砂紙；向後下方延伸之角鋼末端為捕捉裝置與集塵盒之安裝位置）</figcaption></figure>
       </div>
     </div>
   </div>
@@ -860,167 +980,127 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
     <h2 class="reveal">三階段驗證：<br>抓得到、抓得多、<span class="hl">抓到的是什麼</span></h2>
     <p class="lead reveal">靜態封閉導流 → 動態輪胎摩擦 → 高解析質譜化學鑑定。</p>
 
-    <div class="kpi-grid mt-m">
-      <!-- 靜態 -->
-      <div class="kpi wide hero-kpi reveal">
-        <div class="label">Stage 1 · 靜態捕捉效率 η</div>
-        <div class="versus">
-          <div class="side off">
-            <div class="val"><span data-count="0.72" data-dec="2">0.72</span><span class="u">%</span></div>
-            <div class="cap">電場關閉（n=3）</div>
-          </div>
-          <div class="arrow">→</div>
-          <div class="side">
-            <div class="val"><span data-count="16.29" data-dec="2">16.29</span><span class="u">%</span></div>
-            <div class="cap">開啟 15 kV（n=5）</div>
-          </div>
-        </div>
-        <div class="desc">吹塵方式與裝置幾何相同、僅電場開關不同，兩者相差約 <span class="times">22×</span>；關閉之三次均不高於 1.00%，開啟之五次介於 9.00%–21.00%，<strong>兩組數值範圍完全沒有重疊</strong>，差異可歸因於電場產生之庫侖力，顯示靜電捕捉機制確實發揮作用。</div>
-      </div>
-
-      <div class="kpi reveal d1">
-        <div class="label">捕捉效率倍增</div>
-        <div class="val">≈<span data-count="22" data-dec="0">22</span><span class="u">×</span></div>
-        <div class="desc">電場開啟 vs. 關閉，以導電碳粉作為 TRWP 替代物、分析天平（解析度 0.001 g）量測。關閉組三次極板增重均為天平最小讀值，0.72% 實為量測下限，實際值可能更低。</div>
-      </div>
-
-      <!-- 動態 -->
-      <div class="kpi hero-kpi half reveal">
-        <div class="label">Stage 2 · 動態平均捕捉效率</div>
-        <div class="val">≈<span data-count="28" data-dec="0">28</span><span class="u">%</span></div>
-        <div class="desc">輪轂馬達最高轉速 <strong>350 RPM</strong>（≈ <strong>33 km/h</strong> 等效車速）下，輪胎摩擦砂紙 10／20／30 秒各三次；三次測試整體效率平均 <strong>27.6%</strong>，受天平解析度限制，現階段約落於二成至三成之間。</div>
-      </div>
-
-      <div class="kpi half reveal d1">
-        <div class="label">粉塵擴散範圍</div>
-        <div class="val"><span data-count="73" data-dec="0">73</span><span class="u">cm</span></div>
-        <div class="desc">擴散區域水平 0–73 cm；沉積量最多處位於 <strong>27 cm</strong>，該處寬度約 <strong>21 cm</strong>。裝置據此放置於水平 25 cm 處。</div>
-      </div>
-
-      <!-- 質譜 -->
-      <div class="kpi wide hero-kpi reveal">
-        <div class="label">Stage 3 · 質譜鑑定質量誤差（6PPD）</div>
-        <div class="versus">
-          <div class="side">
-            <div class="val"><span data-count="2.98" data-dec="2">2.98</span><span class="u">ppm</span></div>
-            <div class="cap">樣品 1 · 砂紙直接磨耗輪胎</div>
-          </div>
-          <div class="side">
-            <div class="val"><span data-count="1.49" data-dec="2">1.49</span><span class="u">ppm</span></div>
-            <div class="cap">樣品 2 · 本裝置集塵盒收集</div>
-          </div>
-        </div>
-        <div class="desc">以 Bruker micrOTOF II 高解析飛行時間質譜儀分析：6PPD 理論精確質量 <strong>268.1934 Da</strong>，兩樣品實測 <strong>268.1926／268.1930 Da</strong>，皆落在高解析質譜一般採用之 <strong>5 ppm</strong> 誤差範圍內；惟 M+1 與 M 峰之強度比（約 0.6／1）明顯高於理論值（約 0.2），故僅能描述為<strong>「疑似 6PPD」</strong>，仍待 6PPD 真品標準品比對方能確認。</div>
-      </div>
-
-      <div class="kpi reveal d1">
-        <div class="label">極板定距 · 振動測試</div>
-        <div class="val">0<span class="u">跳火</span></div>
-        <div class="desc">動態測試全程未觀察到異常放電聲響或極板跳火；17 mm 間距於振動下無位移。</div>
-      </div>
-    </div>
-
-    <!-- 靜態細節 -->
-    <div class="split mt-l">
+    <!-- STAGE 1 靜態 -->
+    <div class="stage mt-m">
       <div class="reveal">
-        <h3>靜態測試：開啟電場的每一次，都遠高於關閉時</h3>
-        <p class="muted" style="font-size:15px">η = m<sub>plate</sub> / (m<sub>plate</sub> + m<sub>escape</sub>) × 100%</p>
-        <div class="bars mt-s" role="img" aria-label="表三 各次捕捉效率：電場關閉 1.00%、0.67%、0.50%；電場開啟 9.00%、17.00%、18.67%、21.00%、15.80%">
-          <div class="bar"><span class="small">關閉 #1</span><div class="track"><div class="fill off" style="--w:4.76%"></div></div><span class="n">1.00%</span></div>
-          <div class="bar"><span class="small">關閉 #2</span><div class="track"><div class="fill off" style="--w:3.19%"></div></div><span class="n">0.67%</span></div>
-          <div class="bar"><span class="small">關閉 #3</span><div class="track"><div class="fill off" style="--w:2.38%"></div></div><span class="n">0.50%</span></div>
-          <div class="bar"><span class="small">開啟 #1</span><div class="track"><div class="fill" style="--w:42.86%"></div></div><span class="n">9.00%</span></div>
-          <div class="bar"><span class="small">開啟 #2</span><div class="track"><div class="fill" style="--w:80.95%"></div></div><span class="n">17.00%</span></div>
-          <div class="bar"><span class="small">開啟 #3</span><div class="track"><div class="fill" style="--w:88.9%"></div></div><span class="n">18.67%</span></div>
-          <div class="bar"><span class="small">開啟 #4</span><div class="track"><div class="fill" style="--w:100%"></div></div><span class="n">21.00%</span></div>
-          <div class="bar"><span class="small">開啟 #5</span><div class="track"><div class="fill" style="--w:75.24%"></div></div><span class="n">15.80%</span></div>
+        <div class="no">Stage 1 · 靜態捕捉效率 η</div>
+        <h3>開啟電場的每一次，都遠高於關閉時</h3>
+        <div class="stat"><span class="from">0.72 →</span><span data-count="16.29" data-dec="2">16.29</span><span class="u">%</span></div>
+        <p>僅電場開關不同，效率相差約 <strong>22 倍</strong>；兩組數值範圍<strong>完全沒有重疊</strong>（關閉 ≤ 1.00%，開啟 9.00%–21.00%），差異可歸因於庫侖力。</p>
+        <p class="small">關閉組三次極板增重均為天平最小讀值（0.001 g），0.72% 實為量測下限。</p>
+        <p class="small">η = m<sub>plate</sub> / (m<sub>plate</sub> + m<sub>escape</sub>) × 100%</p>
+      </div>
+      <div>
+        <figure class="reveal">
+          <div class="frame"><img src="images/draw/tab3.svg" width="920" height="400" alt="表三 各次捕捉效率：電場關閉 1.00%、0.67%、0.50%；電場開啟 9.00%、17.00%、18.67%、21.00%、15.80%" loading="lazy"></div>
+          <figcaption><b>表三</b>靜態捕捉效率各次量測結果（關閉 n=3；開啟 n=5）。替代粉體為導電碳粉，粒徑分布未必與 TRWP 相同。</figcaption>
+        </figure>
+        <div class="facts reveal">
+          <div><div class="v">−68<small>%</small></div><div class="k">懸停高度 1→5 cm 之核心面積變化（144.27 → 46.00 cm²）</div></div>
+          <div><div class="v">&lt; 2<small>%</small></div><div class="k">左／中／右三通道差異，電場橫向分布均勻</div></div>
+          <div><div class="v">d<sup>−0.68</sup></div><div class="k">核心面積衰減指數（R² = 0.95），較理想平行板 d⁻¹ 平緩</div></div>
         </div>
-        <p class="table-cap"><b>表三</b>靜態捕捉效率原始量測數據（電場關閉 n=3，標準差 0.25%；電場開啟 n=5，標準差 4.52%）。替代粉體限制：導電碳粉與 TRWP 所含碳黑導電特性相近，但粒徑分布未必相同。</p>
-      </div>
-      <figure class="reveal d1">
-        <div class="frame"><img src="images/draw/fig14.svg" width="520" height="800" alt="靜態捕捉測試後銅片極板吸附碳粉" loading="lazy"></div>
-        <figcaption><b>圖十四</b>靜態捕捉測試後銅片極板吸附碳粉之情形</figcaption>
-      </figure>
-    </div>
-
-    <div class="grid g3 mt-m">
-      <div class="card reveal"><div class="mega" style="font-size:clamp(48px,6vw,72px)">−68<span class="u">%</span></div><p class="small mt-s">懸停高度 1→5 cm，核心面積由 144.27 降至 46.00 cm²，與 E = V/d 之衰減趨勢一致（表四）。</p></div>
-      <div class="card reveal d1"><div class="mega" style="font-size:clamp(48px,6vw,72px)">&lt;2<span class="u">%</span></div><p class="small mt-s">左／中／右三通道核心面積差異，電場於通道橫向之分布大致均勻（表五）。</p></div>
-      <div class="card reveal d2"><div class="mega" style="font-size:clamp(48px,6vw,72px)">d<sup style="font-size:.45em">−0.68</sup></div><p class="small mt-s">三個懸停高度之對數迴歸（R² = 0.95），衰減較理想平行板 d⁻¹ 平緩，推測源於有限尺寸電極之近場邊緣效應。核心面積為電場作用之間接指標，其指數不宜直接等同電場強度（表九）。</p></div>
-    </div>
-    <div class="grid g2 mt-s">
-      <figure class="reveal"><div class="frame"><img src="images/draw/fig13.svg" width="1000" height="556" alt="ImageJ 影像分析流程" loading="lazy"></div><figcaption><b>圖十三</b>ImageJ 影像分析流程示意（以懸停高度 5 cm 為例）</figcaption></figure>
-      <figure class="reveal d1"><div class="frame"><img src="images/draw/fig15.svg" width="1000" height="420" alt="核心面積隨懸停高度與時間之變化" loading="lazy"></div><figcaption><b>圖十五</b>核心面積隨 (a) 懸停高度與 (b) 懸停時間之變化趨勢</figcaption></figure>
-    </div>
-
-    <!-- 動態細節 -->
-    <div class="mt-l">
-      <h3 class="reveal">動態測試：越貼近輪胎，不一定越好</h3>
-      <p class="muted reveal" style="max-width:780px">初期測試觀察到「水平 1 cm 之沉積量反低於 3 cm 與 5 cm」——裝置過於貼近胎面時，粉塵尚未擴散至捕捉高度即已通過，且仍處於輪胎旋轉拖曳之邊界層流內。顯示「裝置越貼近輪胎捕捉效果越佳」之直覺未必成立，<strong>放置位置宜依實際擴散分布決定</strong>——這也是本研究建立「粉塵擴散包絡線量測法」的出發點。</p>
-      <div class="grid g2 mt-s">
-        <figure class="reveal"><div class="frame dark"><img src="images/draw/fig19.svg" width="1000" height="434" alt="粉塵擴散範圍示意" loading="lazy"></div><figcaption><b>圖十九</b>粉塵擴散範圍示意（水平 0–73 cm，沉積量最多處 27 cm，寬度約 21 cm）</figcaption></figure>
-        <figure class="reveal d1"><div class="frame"><img src="images/draw/fig20.svg" width="1000" height="400" alt="粉塵雲上緣擴散包絡線" loading="lazy"></div><figcaption><b>圖二十</b>粉塵雲上緣擴散包絡線與水平距離之關係（水平 30 cm 以內為示意）</figcaption></figure>
-      </div>
-
-      <div class="grid g2 mt-m">
-        <div class="reveal">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>測試次別</th><th class="num">10 s</th><th class="num">20 s</th><th class="num">30 s</th><th class="num">該次整體效率</th></tr></thead>
-              <tbody>
-                <tr><td>第 1 次</td><td class="num">25.0%</td><td class="num">27.3%</td><td class="num">29.4%</td><td class="num">27.8%</td></tr>
-                <tr><td>第 2 次</td><td class="num">28.6%</td><td class="num">20.0%</td><td class="num">25.0%</td><td class="num">24.2%</td></tr>
-                <tr><td>第 3 次</td><td class="num">33.3%</td><td class="num">33.3%</td><td class="num">27.8%</td><td class="num">30.8%</td></tr>
-                <tr><td><strong>平均</strong></td><td class="num"><span class="hl">29.0%</span></td><td class="num"><span class="hl">26.9%</span></td><td class="num"><span class="hl">27.4%</span></td><td class="num"><span class="hl">27.6%</span></td></tr>
-                <tr><td>標準差</td><td class="num">4.2%</td><td class="num">6.7%</td><td class="num">2.2%</td><td class="num">3.3%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="table-cap"><b>表八</b>350 RPM 下各次動態測試之獨立捕捉效率（裝置位置：水平 25 cm、垂直 0 cm）。天平解析度 0.001 g，裝置吸附質量僅 0.002–0.005 g，讀值誤差約佔 10–25%，與各次間之變異同一數量級，故現階段僅能說明動態捕捉效率約落於二成至三成之間，尚不足以判定運轉時間之效應。</p>
+        <figure class="reveal">
+          <div class="frame"><img src="images/draw/fig15.svg" width="1000" height="420" alt="核心面積隨懸停高度與時間之變化" loading="lazy"></div>
+          <figcaption><b>圖十五</b>核心面積隨 (a) 懸停高度與 (b) 懸停時間之變化趨勢</figcaption>
+        </figure>
+        <div class="grid g2 figs">
+          <figure class="reveal"><div class="frame"><img src="images/fig14.jpg" width="547" height="945" alt="靜態捕捉測試後銅片極板吸附碳粉" loading="lazy"></div><figcaption><b>圖十四</b>靜態捕捉測試後銅片極板吸附碳粉之情形</figcaption></figure>
+          <figure class="reveal d1"><div class="frame"><img src="images/fig13.png" width="1403" height="727" alt="ImageJ 影像分析流程" loading="lazy"></div><figcaption><b>圖十三</b>ImageJ 影像分析流程示意（以懸停高度 5 cm 為例）</figcaption></figure>
         </div>
-        <figure class="reveal d1"><div class="frame"><img src="images/draw/fig21.svg" width="920" height="470" alt="各運轉時間之平均粉塵質量與捕捉裝置吸附質量" loading="lazy"></div><figcaption><b>圖二十一</b>350 RPM 下各運轉時間三次測試之平均粉塵質量與捕捉裝置吸附質量（誤差棒為標準差）</figcaption></figure>
-      </div>
-      <div class="grid g2 mt-s">
-        <figure class="reveal"><div class="frame"><img src="images/draw/fig18.svg" width="900" height="560" alt="粉塵於收集面之實際沉積情形" loading="lazy"></div><figcaption><b>圖十八</b>粉塵於收集面之實際沉積情形</figcaption></figure>
-        <div class="note reveal d1" style="align-self:start"><strong>開放環境下收集效率仍不高。</strong>主因是輪胎噴出之粉塵擴散範圍（水平 0–73 cm）遠大於裝置之捕捉截面，大部分粉塵未進入極板通道；後續可於裝置前端加裝<strong>導流罩</strong>，將粉塵集中導入極板通道以改善收集效率。<br><br><strong>兩種效率不宜直接比較。</strong>靜態測試於封閉艙體內將全部粉塵導入極板通道；動態測試於開放環境中進行，分母包含未進入裝置捕捉範圍之粉塵。兩者粉塵產生機制、流場條件與效率定義均不同，僅能各自作為對應情境下之獨立指標。</div>
       </div>
     </div>
 
-    <!-- 質譜 -->
-    <div class="mt-l">
-      <div class="reveal" style="max-width:780px">
-        <h3>從「抓到多少」<br>到「抓到的是什麼」</h3>
-        <p class="muted">樣品以深色玻璃罐盛裝、冷藏，並於採集後 24 小時內完成質譜測定。共分析兩組粉塵：<strong>樣品 1</strong> 為以砂紙直接磨耗輪胎所取得之粉塵（未經本裝置），用以確認輪胎粉塵中可觀察到之目標物訊號；<strong>樣品 2</strong> 為動態摩擦測試中由本裝置集塵盒所收集之粉塵。兩者於 m/z 268 附近皆觀察到與 <strong>6PPD</strong>（C₁₈H₂₄N₂）理論質量相近之訊號，質量誤差分別為 <strong>2.98 ppm</strong> 與 <strong>1.49 ppm</strong>。</p>
-        <p class="muted">然而同位素分布並未完全吻合：理論上 M+1 峰（m/z 269.1967）強度約為 M 峰之 20%，實測樣品 1 約為 0.6、樣品 2 約為 1，均明顯偏高，且樣品 2 之 M+1 峰（269.1996）與理論值差距約 10.8 ppm，超出 5 ppm 範圍。此差異可能來自 m/z 269 附近其他物質之訊號重疊或儀器偵測條件，尚未釐清。</p>
-        <p class="small mt-s">＊因此本研究僅以<strong>「疑似 6PPD」</strong>描述，不足以確認樣品中含有 6PPD。樣品 2 之訊號與樣品 1 相似，可推測輪胎粉塵中之目標物有被本裝置收集，惟兩樣品之訊號強度未進行定量比較，尚不足以評估收集量；仍須取得 6PPD 真品標準品進行同批次比對，並釐清同位素強度比之差異，方能作出判定。</p>
+    <!-- STAGE 2 動態 -->
+    <div class="stage">
+      <div class="reveal">
+        <div class="no">Stage 2 · 動態平均捕捉效率</div>
+        <h3>越貼近輪胎，不一定越好</h3>
+        <div class="stat">≈<span data-count="28" data-dec="0">28</span><span class="u">%</span></div>
+        <p><strong>350 RPM</strong>（≈ 33 km/h）下摩擦砂紙 10／20／30 秒各三次，整體效率平均 <strong>27.6%</strong>；受天平解析度限制，約落於二成至三成。</p>
+        <p>水平 1 cm 處的沉積量反而低於 3 cm 與 5 cm：太貼近胎面時粉塵尚未擴散，且仍在邊界層流內。<strong>裝置位置應依實際擴散分布決定</strong>。</p>
+        <div class="note mt-s"><strong>不宜與靜態的 16.29% 直接比較。</strong>動態測試在開放環境進行，分母包含未進入裝置的粉塵（擴散達 73 cm，遠大於捕捉截面）。後續加裝<strong>導流罩</strong>可望改善。</div>
       </div>
-      <div class="grid g2 mt-s">
+      <div>
+        <div class="facts reveal">
+          <div><div class="v">0–73<small>cm</small></div><div class="k">粉塵擴散的水平範圍</div></div>
+          <div><div class="v">27<small>cm</small></div><div class="k">沉積最多處（寬約 21 cm）；裝置置於 25 cm</div></div>
+          <div><div class="v">0<small>跳火</small></div><div class="k">全程無異常放電，17 mm 間距無位移</div></div>
+        </div>
+        <figure class="reveal">
+          <div class="frame"><img src="images/draw/fig19.svg" width="1000" height="434" alt="粉塵擴散範圍示意" loading="lazy"></div>
+          <figcaption><b>圖十九</b>粉塵擴散範圍示意（水平 0–73 cm，沉積量最多處 27 cm，寬度約 21 cm）</figcaption>
+        </figure>
+        <figure class="reveal">
+          <div class="frame"><img src="images/draw/fig20.svg" width="1000" height="400" alt="粉塵雲上緣擴散包絡線" loading="lazy"></div>
+          <figcaption><b>圖二十</b>粉塵雲上緣擴散包絡線與水平距離之關係（水平 30 cm 以內為示意）</figcaption>
+        </figure>
+        <figure class="reveal">
+          <div class="frame"><img src="images/draw/fig21.svg" width="920" height="470" alt="各運轉時間之平均粉塵質量與捕捉裝置吸附質量" loading="lazy"></div>
+          <figcaption><b>圖二十一</b>350 RPM 下各運轉時間三次測試之平均粉塵質量與捕捉裝置吸附質量（誤差棒為標準差）</figcaption>
+        </figure>
+        <div class="tbl reveal">
+          <table>
+            <thead><tr><th>測試次別</th><th class="num">10 s</th><th class="num">20 s</th><th class="num">30 s</th><th class="num">該次整體效率</th></tr></thead>
+            <tbody>
+              <tr><td>第 1 次</td><td class="num">25.0%</td><td class="num">27.3%</td><td class="num">29.4%</td><td class="num">27.8%</td></tr>
+              <tr><td>第 2 次</td><td class="num">28.6%</td><td class="num">20.0%</td><td class="num">25.0%</td><td class="num">24.2%</td></tr>
+              <tr><td>第 3 次</td><td class="num">33.3%</td><td class="num">33.3%</td><td class="num">27.8%</td><td class="num">30.8%</td></tr>
+              <tr class="avg"><td>平均</td><td class="num">29.0%</td><td class="num">26.9%</td><td class="num">27.4%</td><td class="num"><span class="hl">27.6%</span></td></tr>
+              <tr><td>標準差</td><td class="num">4.2%</td><td class="num">6.7%</td><td class="num">2.2%</td><td class="num">3.3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-cap"><b>表八</b>各次獨立捕捉效率（裝置位置：水平 25 cm、垂直 0 cm）。吸附質量僅 0.002–0.005 g，讀值誤差約 10–25%，尚不足以判定運轉時間之效應。</p>
+        <figure class="reveal">
+          <div class="frame"><img src="images/fig18.jpg" width="900" height="694" alt="粉塵於收集面之實際沉積情形" loading="lazy"></div>
+          <figcaption><b>圖十八</b>粉塵於收集面之實際沉積情形</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- STAGE 3 質譜 -->
+    <div class="stage">
+      <div class="reveal">
+        <div class="no">Stage 3 · 質譜鑑定質量誤差（6PPD）</div>
+        <h3>從「抓到多少」到「抓到的是什麼」</h3>
+        <div class="stat"><span data-count="2.98" data-dec="2">2.98</span><span class="u">ppm</span></div>
+        <p>兩組粉塵皆於 m/z 268 出現與 6PPD（C₁₈H₂₄N₂，理論 268.1934 Da）相近的訊號，誤差皆小於 5 ppm。</p>
+        <ul class="points">
+          <li><b>樣品 1</b><span>砂紙直接磨耗輪胎的粉塵，未經本裝置。實測 268.1926 Da，誤差 <strong>2.98 ppm</strong>。</span></li>
+          <li><b>樣品 2</b><span>本裝置集塵盒收集的粉塵。實測 268.1930 Da，誤差 <strong>1.49 ppm</strong>。</span></li>
+          <li><b>同位素比</b><span>M+1／M 理論約 0.2，實測約 0.6 與 1，<strong>並不吻合</strong>；原因尚未釐清。</span></li>
+        </ul>
+        <div class="note mt-s">因此僅稱<strong>「疑似 6PPD」</strong>：須以真品標準品同批次比對才能確認，目前也未做定量。</div>
+        <p class="small mt-s">樣品以深色玻璃罐冷藏，24 小時內以 Bruker micrOTOF II 高解析飛行時間質譜儀測定。</p>
+      </div>
+      <div>
         <figure class="reveal">
           <div class="frame"><img src="images/draw/fig22.svg" width="1000" height="630" alt="樣品1質譜圖：全圖與m/z 268附近放大，並與6PPD理論同位素分布比對" loading="lazy"></div>
-          <figcaption><b>圖二十二</b>樣品 1（砂紙直接磨耗輪胎之粉塵）之質譜圖（上：全圖；下：m/z 268 附近放大並與 6PPD 理論同位素分布比對，質量誤差 2.98 ppm；依實測譜圖之峰位與峰高重繪示意）</figcaption>
+          <figcaption><b>圖二十二</b>樣品 1（砂紙直接磨耗輪胎之粉塵）質譜圖，上為全圖、下為 m/z 268 附近放大。依實測譜圖之峰位與峰高重繪示意。</figcaption>
         </figure>
-        <figure class="reveal d1">
+        <figure class="reveal">
           <div class="frame"><img src="images/draw/fig23.svg" width="1000" height="630" alt="樣品2質譜圖：全圖與m/z 268附近放大，並與6PPD理論同位素分布比對" loading="lazy"></div>
-          <figcaption><b>圖二十三</b>樣品 2（本裝置集塵盒所收集之粉塵）之質譜圖（上：全圖；下：m/z 268 附近放大並與 6PPD 理論同位素分布比對，質量誤差 1.49 ppm；依實測譜圖之峰位與峰高重繪示意）</figcaption>
+          <figcaption><b>圖二十三</b>樣品 2（本裝置集塵盒所收集之粉塵）質譜圖。依實測譜圖之峰位與峰高重繪示意。</figcaption>
         </figure>
       </div>
     </div>
 
     <!-- 理論 vs 實測 -->
-    <div class="mt-l reveal">
+    <div class="stage-end reveal">
       <h3>誠實面對差距：理論 vs. 實測</h3>
-      <div class="table-wrap mt-s">
+      <div class="tbl mt-s">
         <table>
           <thead><tr><th>比較項目</th><th>理論／文獻預估</th><th>本研究實測</th><th>差異說明</th></tr></thead>
           <tbody>
-            <tr><td>電場強度衰減指數</td><td>E ∝ d⁻¹（理想平行板）</td><td><span class="hl">核心面積 ∝ d⁻⁰·⁶⁸</span></td><td class="muted">近場邊緣效應致衰減較緩</td></tr>
-            <tr><td>靜態捕捉效率</td><td>工業 ESP 約 90–99.9%</td><td><span class="hl">16.29%</span></td><td class="muted">極板面積與滯留時間不足</td></tr>
-            <tr><td>動態捕捉效率</td><td>文獻原型 60–80%</td><td><span class="hl">約 28%</span></td><td class="muted">開放流場、未加裝導流罩</td></tr>
-            <tr><td>6PPD 精確質量</td><td>268.1934 Da</td><td><span class="hl">268.1926／268.1930 Da</span></td><td class="muted">誤差 2.98／1.49 ppm，相近但仍待標準品驗證</td></tr>
+            <tr><td>電場強度衰減指數</td><td>E ∝ d⁻¹（理想平行板）</td><td><span class="hl">核心面積 ∝ d⁻⁰·⁶⁸</span></td><td>近場邊緣效應致衰減較緩</td></tr>
+            <tr><td>靜態捕捉效率</td><td>工業 ESP 約 90–99.9%</td><td><span class="hl">16.29%</span></td><td>極板面積與滯留時間不足</td></tr>
+            <tr><td>動態捕捉效率</td><td>文獻原型 60–80%</td><td><span class="hl">約 28%</span></td><td>開放流場、未加裝導流罩</td></tr>
+            <tr><td>6PPD 精確質量</td><td>268.1934 Da</td><td><span class="hl">268.1926／268.1930 Da</span></td><td>誤差 2.98／1.49 ppm，相近但仍待標準品驗證</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="table-cap"><b>表九</b>理論預估值與實驗量測值之比較。差異來源：僅四片銅片、有效面積與滯留時間有限；動態測試未加導流罩（擴散達 73 cm 遠大於捕捉截面）；放置位置僅經單點驗證——同時也指出了後續提升效率的具體方向。</p>
+      <p class="table-cap"><b>表九</b>理論預估與實測之比較。差距來源：僅四片銅片、動態測試未加導流罩、放置位置僅經單點驗證——也指出了後續提升效率的方向。</p>
     </div>
   </div>
 </section>
@@ -1039,10 +1119,10 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
     <h2 class="reveal">非廢氣排放，<br>正成為法規新焦點</h2>
 
     <div class="big-stat" style="border-top:0;padding-top:0">
-      <div class="reveal"><div class="mega accent" style="font-size:clamp(64px,10vw,130px)">Euro 7</div></div>
+      <div class="reveal"><div class="mega accent" style="font-size:clamp(44px,6.6vw,92px);white-space:nowrap">Euro 7</div></div>
       <div class="reveal d1">
         <h3>全球首例針對非廢氣排放的車輛法規</h3>
-        <p class="muted">歐盟第七期排放標準已於 2024 年正式通過，首度將煞車微粒排放與輪胎磨耗率納入車輛型式認證規範，顯示相關管制已成為國際趨勢。惟 Euro 7 係以輪胎磨耗率規範輪胎本身，<strong>並未要求車輛加裝捕捉裝置</strong>；本裝置之定位為法規要求以外之補充減排手段。</p>
+        <p class="muted">歐盟 Euro 7 於 2024 年通過，首度將煞車微粒與輪胎磨耗率納入車輛型式認證。但它規範的是輪胎本身，<strong>並未要求加裝捕捉裝置</strong>——本裝置的定位是法規以外的補充減排手段。</p>
       </div>
     </div>
 
@@ -1052,16 +1132,14 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       <div class="card reveal d2"><h4>商用車隊優先導入</h4><p class="small">軸重高、里程長、單車 TRWP 排放量高於一般轎車，導入效益相對較高；輪拱空間與車載電力（通常 24 V）較寬裕；固定調度站便於標準化清理維護。</p></div>
     </div>
 
-    <div class="split mt-l">
-      <div class="reveal">
-        <h3>應用對象與固定方式</h3>
-        <p class="muted" style="font-size:15px"><strong>汽車</strong>：以公車為例，安裝於車身後方鈑件底部；後輪處可設計升降機構，平坦路面降下以縮短與輪胎距離，遇上坡或起伏時升起。</p>
-        <p class="muted" style="font-size:15px"><strong>機車</strong>：國內機車數量龐大；輪胎更換頻率較高，較新之輪胎可釋出含 6PPD 較多之磨耗微粒。後輪支架延伸至後輪後方，概念近似後土除（擋泥板）。</p>
-        <p class="muted" style="font-size:15px"><strong>腳踏車</strong>：安裝方式最簡單，惟仍需解決供電問題；可採與機車相同之支架方式。</p>
-      </div>
-      <div class="placeholder reveal d1">
-        [機車後輪捕捉裝置支架實裝照片]
-        <small>報告 §5「應用對象與捕捉裝置固定方式」提及之實裝展示平台支架，報告中無對應圖號</small>
+    <div class="mt-l reveal">
+      <h3>應用對象與固定方式</h3>
+      <div style="max-width:860px">
+        <ul class="points">
+          <li><b>汽車</b><span>以公車為例，裝於車身後方鈑件底部；後輪處可設升降機構，平路降下貼近輪胎，遇上坡或起伏時升起。</span></li>
+          <li><b>機車</b><span>後輪支架延伸至輪後，概念近似後土除。機車數量龐大、換胎頻繁，較新的輪胎釋出的微粒含 6PPD 較多。</span></li>
+          <li><b>腳踏車</b><span>安裝方式最簡單，可沿用機車的支架做法，但仍需解決供電。</span></li>
+        </ul>
       </div>
     </div>
 
@@ -1076,10 +1154,10 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
     <div class="mt-l">
       <h3 class="reveal">待解決之工程課題與對策 <span class="cite">表十</span></h3>
       <div class="mt-s">
-        <div class="issue reveal"><h4>捕捉粉塵回收與二次揚塵抑制</h4><p>改製為可抽出式極板匣，停機後整匣回收；運轉期間維持電場常開以壓制微粒脫落；另試驗於極板塗佈薄層矽油作為黏著介質，並以對照組評估其影響（須留意反電暈 back corona）。</p></div>
-        <div class="issue reveal"><h4>潮濕與異物之運作可靠性</h4><p>雨滴感測模組遇水氣即斷電；進氣口前端可加裝具傾角之擋水百葉，利用水滴慣性較大的特性使其撞板排出（慣性分離），惟粒徑較大之 TRWP 亦可能同時被攔下，須評估其對捕捉效率之影響；入口不帶電粗網（孔徑 5–10 mm）阻擋落葉砂石；超疏水塗層降低沿面漏電風險；集塵盒底部單向排水閥（duckbill valve）自動排出積水。</p></div>
-        <div class="issue reveal"><h4>6PPD 之分離與定量回收</h4><p>「先捕捉、後萃取」策略：裝置端攔截含 6PPD 之橡膠微粒，回收後於實驗室以溶劑萃取，並參考現行 6PPD 與 6PPD-Q 之分析方法進行定量。</p></div>
-        <div class="issue reveal"><h4>銅片耗材成本與質量優化</h4><p>評估以金屬沖孔板或金屬網取代實心銅片，以降低材料用量與質量，惟須同時評估有效集塵面積減少，以及孔緣處電場集中所伴隨之跳火風險；材質可改為耐腐蝕性較佳之 SUS 304/316 或鋁合金；量產階段可評估導電塑膠一體射出成型之可行性。</p></div>
+        <div class="issue reveal"><h4>捕捉粉塵回收與二次揚塵抑制</h4><p>改為可抽出式極板匣，停機後整匣回收；運轉時電場常開以壓制微粒脫落。另試驗塗佈薄層矽油增加附著，須以對照組評估反電暈（back corona）的影響。</p></div>
+        <div class="issue reveal"><h4>潮濕與異物之運作可靠性</h4><p>雨滴感測模組遇水即斷電；進氣口加擋水百葉與不帶電粗網（孔徑 5–10 mm）阻擋水滴與落葉砂石；外殼內部噴塗超疏水塗層；集塵盒底部設單向排水閥。</p></div>
+        <div class="issue reveal"><h4>6PPD 之分離與定量回收</h4><p>先捕捉、後萃取：裝置攔截含 6PPD 的橡膠微粒，回收後於實驗室以溶劑萃取，參考現行分析方法定量。</p></div>
+        <div class="issue reveal"><h4>銅片耗材成本與質量優化</h4><p>評估以沖孔板或金屬網取代實心銅片，材質改用不鏽鋼（SUS 304/316）或鋁合金；須留意集塵面積減少與孔緣跳火風險。量產可評估導電塑膠射出成型。</p></div>
       </div>
     </div>
 
@@ -1087,12 +1165,12 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       <div class="reveal">
         <h3>未來工作</h3>
         <ol class="future mt-s">
-          <li>取得負載能力更高之電源與馬達設備，完成多組轉速量測，建立效率與等效車速之關係曲線。</li>
-          <li>依擴散包絡線，以兩階段最佳化（先水平距離、再垂直高度）尋找最佳放置位置。</li>
-          <li>延長運轉時間、增加重複次數，增加單次量測質量以降低相對量測誤差，並強化統計代表性。</li>
-          <li>比較不同砂紙目數與柏油之產塵特性；取得 6PPD 真品標準品比對，嘗試建立同位素稀釋定量方法。</li>
-          <li>導入絕緣性替代粉體作為對照組，驗證對導電微粒之選擇性捕捉能力。</li>
-          <li>於裝置前端加裝導流罩並納入動態摩擦測試，比較加裝前後之收集效率，改善開放環境下收集效率偏低之問題。</li>
+          <li><span><strong>多轉速量測</strong>——換用負載能力更高的電源與馬達，建立效率與等效車速的關係。</span></li>
+          <li><span><strong>位置最佳化</strong>——依擴散包絡線，先掃水平距離、再掃垂直高度。</span></li>
+          <li><span><strong>提高統計代表性</strong>——延長運轉時間、增加重複次數，降低相對量測誤差。</span></li>
+          <li><span><strong>6PPD 標準品比對</strong>——釐清同位素強度比差異，嘗試建立同位素稀釋定量方法。</span></li>
+          <li><span><strong>絕緣粉體對照</strong>——驗證對導電微粒的選擇性捕捉能力。</span></li>
+          <li><span><strong>加裝導流罩</strong>——比較加裝前後的收集效率，改善開放環境下效率偏低的問題。</span></li>
         </ol>
       </div>
       <div>
@@ -1180,7 +1258,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
         <li>California DTSC, "Product–chemical profile for motor vehicle tires containing 6PPD," 2021.</li>
       </ol>
     </details>
-    <p class="cite mt-m">© 中原大學機械系 · 主動式 TRWP 靜電捕捉裝置專題團隊 · 所有數據取自專題書面報告；除 3D 模型外，圖片皆依報告原圖重繪示意</p>
+    <p class="cite mt-m">© 中原大學機械系 · 主動式 TRWP 靜電捕捉裝置專題團隊 · 所有數據與圖片取自專題書面報告；圖表依報告數據重繪</p>
   </div>
 </footer>
 
@@ -1265,7 +1343,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
   (function(){
     const cv=document.getElementById('espCanvas'); if(!cv) return;
     const ctx=cv.getContext('2d');
-    const ACC=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#ff7a1a';
+    const ACC=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#ff8a1a';
     const vIn=document.getElementById('vIn'), dIn=document.getElementById('dIn');
     const V0=15, D0=17, E0=V0/D0, TRANSIT=2.4; // 粒子穿越極板所需秒數
     let W,H,s,ps=[],stuck=[],type='carbon',last=0,visible=false;
@@ -1316,7 +1394,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
           ctx.beginPath(); ctx.moveTo(x,y);
           while(x<W){ x+=vx*.01; if(x>g.pl&&x<g.pr){vy+=acc*qm*.01; y+=vy*.01;}
             if(y>=g.bot-2&&x>g.pl&&x<g.pr){y=g.bot-2;hit=true;ctx.lineTo(x,y);break;} ctx.lineTo(x,y); }
-          ctx.strokeStyle=k==='carbon'?'rgba(233,240,236,.55)':'rgba(201,169,120,.6)'; ctx.lineWidth=1.3; ctx.stroke();
+          ctx.strokeStyle=k==='carbon'?'rgba(242,239,232,.6)':'rgba(201,169,120,.6)'; ctx.lineWidth=1.3; ctx.stroke();
           if(hit){ctx.beginPath();ctx.arc(x,y,3,0,6.283);ctx.fillStyle=k==='carbon'?ACC:'#c9a978';ctx.fill();}
         }
       });
@@ -1328,19 +1406,19 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
 
       // 電場線
       const alpha=Math.min(.5,.08+E/E0*.25);
-      ctx.strokeStyle=`rgba(120,160,220,${alpha})`; ctx.lineWidth=1;
+      ctx.strokeStyle=`rgba(242,239,232,${alpha})`; ctx.lineWidth=1;
       for(let x=g.pl+18;x<g.pr;x+=36){ctx.beginPath();ctx.moveTo(x,g.top+6);ctx.lineTo(x,g.bot-6);ctx.stroke();
         ctx.beginPath();ctx.moveTo(x-3,g.bot-11);ctx.lineTo(x,g.bot-6);ctx.lineTo(x+3,g.bot-11);ctx.stroke();}
       // 極板
-      ctx.fillStyle=V()>0?ACC:'#5f7268'; ctx.fillRect(g.pl,g.top-6,g.L,6);
-      ctx.fillStyle='#8a9a92'; ctx.fillRect(g.pl,g.bot,g.L,6);
-      ctx.font='12px "Noto Sans TC",sans-serif'; ctx.fillStyle='#93a69c';
+      ctx.fillStyle=V()>0?ACC:'#77726a'; ctx.fillRect(g.pl,g.top-6,g.L,6);
+      ctx.fillStyle='#a8a297'; ctx.fillRect(g.pl,g.bot,g.L,6);
+      ctx.font='12px "Noto Serif TC",serif'; ctx.fillStyle='#a8a297';
       ctx.fillText(`正極板 +${V().toFixed(1)} kV`,g.pl,g.top-14);
       ctx.fillText('負極板（接地）',g.pl,g.bot+22);
       // 間距標示
-      ctx.strokeStyle='#5f7268'; ctx.beginPath(); ctx.moveTo(g.pr+14,g.top); ctx.lineTo(g.pr+14,g.bot); ctx.stroke();
+      ctx.strokeStyle='#77726a'; ctx.beginPath(); ctx.moveTo(g.pr+14,g.top); ctx.lineTo(g.pr+14,g.bot); ctx.stroke();
       ctx.fillText(`d=${D()}`,g.pr+6,g.top-14);
-      ctx.fillStyle='#5f7268'; ctx.fillText('氣流 →',8,g.top-14);
+      ctx.fillStyle='#77726a'; ctx.fillText('氣流 →',8,g.top-14);
     }
 
     function draw(t){
@@ -1361,7 +1439,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       });
       if(stuck.length>220) stuck.splice(0,stuck.length-220);
       stuck.forEach(q=>{ctx.beginPath();ctx.arc(q.x,g.bot-q.r*.6,q.r,0,6.283);ctx.fillStyle=q.c?ACC:'#c9a978';ctx.fill();});
-      ps.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=p.c?'#e9f0ec':'#c9a978';ctx.fill();});
+      ps.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=p.c?'#f2efe8':'#c9a978';ctx.fill();});
       if(visible && !reduce) requestAnimationFrame(draw);
     }
     new IntersectionObserver(es=>{ const was=visible; visible=es[0].isIntersecting; if(visible&&!was){last=performance.now();requestAnimationFrame(draw);} }).observe(cv);
@@ -1460,7 +1538,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
   /* ---- Hero 微粒動畫：粒子由左流入，靠近中央「極板」時被吸附 ---- */
   const cv=document.getElementById('particles'), ctx=cv.getContext('2d');
   const css=getComputedStyle(document.documentElement);
-  const ACC=css.getPropertyValue('--accent').trim()||'#ff7a1a';
+  const ACC=css.getPropertyValue('--accent').trim()||'#ff8a1a';
   let W,H,ps=[],plates=[];
   function size(){
     const dpr=Math.min(devicePixelRatio||1,2);
@@ -1478,7 +1556,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
     ctx.clearRect(0,0,W,H);
     const top=H*.22, bot=H*.82;
     plates.forEach(px=>{
-      const g=ctx.createLinearGradient(0,top,0,bot); g.addColorStop(0,'rgba(255,122,26,0)'); g.addColorStop(.5,'rgba(255,122,26,.35)'); g.addColorStop(1,'rgba(255,122,26,0)');
+      const g=ctx.createLinearGradient(0,top,0,bot); g.addColorStop(0,'rgba(255,138,26,0)'); g.addColorStop(.5,'rgba(255,138,26,.35)'); g.addColorStop(1,'rgba(255,138,26,0)');
       ctx.fillStyle=g; ctx.fillRect(px-1,top,2,bot-top);
     });
     ps.forEach((p,i)=>{
@@ -1492,7 +1570,7 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
       } else { p.life++; if(p.life>240) ps[i]=spawn(false); }
       if(p.x>W+10||p.y<-10||p.y>H+10) ps[i]=spawn(false);
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283);
-      ctx.fillStyle=p.stuck?ACC:(p.charged?'rgba(233,240,236,.55)':'rgba(147,166,156,.35)');
+      ctx.fillStyle=p.stuck?ACC:(p.charged?'rgba(242,239,232,.6)':'rgba(168,162,151,.35)');
       ctx.fill();
     });
     if(!reduce && heroVisible) requestAnimationFrame(frame);
@@ -1509,6 +1587,20 @@ details ol{padding-left:22px;margin-top:14px;font-size:12.5px;color:var(--muted)
   let lastW=0, rT;
   addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(cv.clientWidth!==lastW){ lastW=cv.clientWidth; size(); } },150); });
   size(); lastW=cv.clientWidth; frame();
+})();
+</script>
+<script>
+(function(){
+  var mark=document.getElementById('rulerMark'), label=document.getElementById('rulerLabel');
+  var secs=[['problem','The Problem'],['principle','How It Works'],['device','The Device'],['results','Results'],['vision','Vision'],['team','Team']];
+  function up(){
+    var d=document.documentElement, max=d.scrollHeight-d.clientHeight;
+    mark.style.left=(max>0?Math.min(1,d.scrollTop/max)*100:0)+'%';
+    var cur=0, name='Intro';
+    secs.forEach(function(s,i){var el=document.getElementById(s[0]); if(el && el.getBoundingClientRect().top < innerHeight*.5){cur=i+1; name=s[1];}});
+    label.textContent=('0'+cur)+' / 06 — '+name;
+  }
+  addEventListener('scroll',up,{passive:true}); addEventListener('resize',up); up();
 })();
 </script>
 </body>
