@@ -485,6 +485,16 @@ ol.future li strong{color:var(--text)}
 .donut .s{font-size:13px;fill:var(--faint)}
 .donut .c{font-family:var(--font-num);font-weight:700;font-size:76px;letter-spacing:-.05em;fill:var(--text)}
 .donut .cu{font-size:30px;fill:var(--accent);letter-spacing:0}
+
+/* 可展開的細節區塊 */
+details.more{background:transparent;padding:0;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+details.more>summary{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;color:var(--accent);padding:14px 0;list-style:none;display:flex;align-items:center;gap:10px}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"+";display:inline-grid;place-items:center;width:18px;height:18px;border:1px solid var(--accent);font-size:13px;line-height:1}
+details.more[open]>summary::before{content:"−"}
+details.more>summary:hover{color:var(--accent-2)}
+details.more>*:not(summary){margin-top:28px}
+details.more>*:last-child{margin-bottom:32px}
 </style>
 </head>
 <body>
@@ -543,12 +553,6 @@ ol.future li strong{color:var(--text)}
   <div class="scroll-hint">SCROLL<span></span></div>
 </header>
 
-<!-- 電影式過場句 -->
-<div class="statement">
-  <div class="wrap">
-    <p class="reveal">車輛廢氣排放隨電動化而減少，<br><span class="dim">但電動車質量較大、瞬間扭力較高，</span><br><span class="hl">輪胎磨損微粒的排放並未改善。</span></p>
-  </div>
-</div>
 
 <!-- ================= 2. 問題陳述 ================= -->
 <section id="problem" class="alt">
@@ -589,19 +593,18 @@ ol.future li strong{color:var(--text)}
 
     <div class="mt-l">
       <h3 class="reveal">現有方案的限制</h3>
-      <p class="muted reveal" style="max-width:760px">國內外針對非廢氣排放微粒（NEE）的處理，多停留在法制研析與成分量測階段；實務硬體上，則多半採用傳統物理濾網或被動式空氣動力學導流。</p>
       <div class="grid g3 mt-s">
         <div class="card flaw reveal d1">
           <h4>傳統物理濾網</h4>
-          <p class="small">對車輛行進造成額外風阻、容易堵塞，更會影響電動車的續航里程。</p>
+          <p class="small">增加行進風阻、容易堵塞，影響電動車續航里程。</p>
         </div>
         <div class="card flaw reveal d2">
           <h4>被動式導流</h4>
-          <p class="small">主要依賴微粒之慣性進行分離，對慣性小之細懸浮微粒（PM2.5）捕捉能力有限。</p>
+          <p class="small">依賴微粒慣性分離，對 PM2.5 等細微粒的捕捉能力有限。</p>
         </div>
         <div class="card flaw reveal d3">
           <h4>既有靜電捕捉概念</h4>
-          <p class="small">國際新創團隊 The Tyre Collective 已提出靜電捕捉概念並取得專利，其原型亦已進行實驗台架測試；惟公開資料中較少完整之高壓電場流場驗證與模組化機構設計細節。</p>
+          <p class="small">The Tyre Collective 已提出概念並取得專利；公開資料較少完整的電場流場驗證與機構設計細節。</p>
         </div>
       </div>
     </div>
@@ -741,7 +744,6 @@ ol.future li strong{color:var(--text)}
       <div class="tag reveal">3.2</div>
       <h3 class="reveal mt-s">雨滴感測器安全保護模組</h3>
       <p class="muted reveal" style="max-width:780px">15 kV 高壓若在潮濕環境下持續通電，可能導致沿面漏電或電弧放電。雨滴感測器偵測降雨 → Arduino 判讀 → 控制繼電器，偵測到降雨時<strong>自動切斷高壓電場供電</strong>。</p>
-      <p class="small reveal" style="max-width:780px">應用限制：降雨期間路面揚塵雖顯著減少，但此時 TRWP 多隨路面逕流進入排水系統，已非本裝置所能處理之範圍。</p>
 
       <div class="mt-m">
         <h4 class="reveal">電路架構</h4>
@@ -839,7 +841,22 @@ ol.future li strong{color:var(--text)}
         <p class="table-cap reveal"><b>圖七</b>雨滴感測器安全保護模組完整電路方塊圖</p>
       </div>
 
-      <div class="sim mt-m reveal" id="rainSim">
+      <div class="split mt-m">
+        <div class="reveal">
+          <h4>麵包板驗收結果 <span class="cite">表一</span></h4>
+          <ul class="checklist mt-s">
+            <li><span class="i">01</span><div>開機（乾燥狀態）<small>繼電器通電，15 kV 正常運作</small></div><span class="tag ok">通過</span></li>
+            <li><span class="i">02</span><div>偵測到降雨<small>繼電器即時斷電</small></div><span class="tag ok">通過</span></li>
+            <li><span class="i">03</span><div>停雨後延遲復電<small>延遲時間內維持斷電，屆滿後恢復供電</small></div><span class="tag ok">通過</span></li>
+            <li><span class="i">04</span><div>手動開關關閉之優先權<small>無論感測器狀態，強制斷電</small></div><span class="tag ok">設計成立</span></li>
+          </ul>
+        </div>
+        <figure class="reveal d1"><div class="frame"><img src="images/fig10.jpg" width="1400" height="812" alt="麵包板實體接線" loading="lazy"></div><figcaption><b>圖十</b>雨滴感測器安全保護模組之麵包板實體接線</figcaption></figure>
+      </div>
+
+      <details class="more mt-m">
+        <summary>展開細節：互動模擬器、接點選用理由、程式實作</summary>
+      <div class="sim reveal" id="rainSim">
         <div class="sim-head">
           <div><div class="label">INTERACTIVE · 互動模擬</div><h3>雨滴感測器模擬器</h3></div>
           <span class="tag">依附錄 A 程式邏輯 · DRY_DELAY = 5 秒（測試值）</span>
@@ -897,31 +914,18 @@ ol.future li strong{color:var(--text)}
           </div>
         </div>
       </div>
-
-      <div class="split mt-m">
-        <div class="reveal">
-          <h4>選用 NO（常開）接點的理由</h4>
+        <div class="split">
+          <div class="reveal">
+            <h4>選用 NO（常開）接點的理由</h4>
           <p class="muted" style="font-size:15px">故障安全（fail-safe）：Arduino 當機、電源異常或訊號線鬆脫時，繼電器線圈失磁、簧片彈回，<strong>高壓自動關閉</strong>。若採 NC 接點，故障時高壓反而持續開啟。</p>
-          <h4 class="mt-m">麵包板驗收結果 <span class="cite">表一</span></h4>
-          <ul class="checklist mt-s">
-            <li><span class="i">01</span><div>開機（乾燥狀態）<small>繼電器通電，15 kV 正常運作</small></div><span class="tag ok">通過</span></li>
-            <li><span class="i">02</span><div>偵測到降雨<small>繼電器即時斷電</small></div><span class="tag ok">通過</span></li>
-            <li><span class="i">03</span><div>停雨後延遲復電<small>延遲時間內維持斷電，屆滿後恢復供電</small></div><span class="tag ok">通過</span></li>
-            <li><span class="i">04</span><div>手動開關關閉之優先權<small>無論感測器狀態，強制斷電</small></div><span class="tag ok">設計成立</span></li>
-          </ul>
-        </div>
-        <figure class="reveal d1">
+            <p class="small mt-s">應用限制：降雨期間路面揚塵雖顯著減少，但此時 TRWP 多隨路面逕流進入排水系統，已非本裝置所能處理之範圍。</p>
+          </div>
+          <figure class="reveal d1">
           <div class="frame"><img src="images/draw/fig08.svg" width="640" height="300" alt="繼電器 NO/NC 接點選用理由" loading="lazy"></div>
           <figcaption><b>圖八</b>繼電器 NO／NC 接點選用理由之邏輯示意</figcaption>
         </figure>
-      </div>
-
-      <div class="grid g2 mt-m">
-        <figure class="reveal"><div class="frame"><img src="images/fig10.jpg" width="1400" height="812" alt="麵包板實體接線" loading="lazy"></div><figcaption><b>圖十</b>雨滴感測器安全保護模組之麵包板實體接線</figcaption></figure>
-        <figure class="reveal d1"><div class="frame"><img src="images/fig11.jpg" width="652" height="518" alt="序列埠監控紀錄" loading="lazy"></div><figcaption><b>圖十一</b>序列埠監控紀錄（左：乾燥持續通電；右：偵測降雨後斷電並延遲等待）</figcaption></figure>
-      </div>
-
-      <div class="split mt-m" style="align-items:start">
+        </div>
+      <div class="split" style="align-items:start">
         <div class="reveal">
           <h4>Arduino 程式實作</h4>
           <p class="muted" style="font-size:15px">開機先斷電，確保高壓不會誤啟動；之後每 300 ms 讀取一次感測器：偵測到水即斷電，停雨超過 DRY_DELAY 才復電。</p>
@@ -940,6 +944,8 @@ ol.future li strong{color:var(--text)}
           <figcaption><b>圖九</b>雨滴感測器安全保護模組之程式判斷流程</figcaption>
         </figure>
       </div>
+        <figure class="reveal" style="max-width:620px"><div class="frame"><img src="images/fig11.jpg" width="652" height="518" alt="序列埠監控紀錄" loading="lazy"></div><figcaption><b>圖十一</b>序列埠監控紀錄（左：乾燥持續通電；右：偵測降雨後斷電並延遲等待）</figcaption></figure>
+      </details>
     </div>
 
     <!-- 集塵盒回收機構 -->
@@ -992,7 +998,6 @@ ol.future li strong{color:var(--text)}
         <div class="stat"><span class="from">0.72 →</span><span data-count="16.29" data-dec="2">16.29</span><span class="u">%</span></div>
         <p>僅電場開關不同，效率相差約 <strong>22 倍</strong>；兩組數值範圍<strong>完全沒有重疊</strong>（關閉 ≤ 1.00%，開啟 9.00%–21.00%），差異可歸因於庫侖力。</p>
         <p class="small">關閉組三次極板增重均為天平最小讀值（0.001 g），0.72% 實為量測下限。</p>
-        <p class="small">η = m<sub>plate</sub> / (m<sub>plate</sub> + m<sub>escape</sub>) × 100%</p>
       </div>
       <div>
         <figure class="reveal">
@@ -1004,6 +1009,8 @@ ol.future li strong{color:var(--text)}
           <div><div class="v">&lt; 2<small>%</small></div><div class="k">左／中／右三通道差異，電場橫向分布均勻</div></div>
           <div><div class="v">d<sup>−0.68</sup></div><div class="k">核心面積衰減指數（R² = 0.95），較理想平行板 d⁻¹ 平緩</div></div>
         </div>
+        <details class="more">
+          <summary>展開細節：影像分析（圖十三至圖十五）</summary>
         <figure class="reveal">
           <div class="frame"><img src="images/draw/fig15.svg" width="1000" height="420" alt="核心面積隨懸停高度與時間之變化" loading="lazy"></div>
           <figcaption><b>圖十五</b>核心面積隨 (a) 懸停高度與 (b) 懸停時間之變化趨勢</figcaption>
@@ -1012,6 +1019,7 @@ ol.future li strong{color:var(--text)}
           <figure class="reveal"><div class="frame"><img src="images/fig14.jpg" width="547" height="945" alt="靜態捕捉測試後銅片極板吸附碳粉" loading="lazy"></div><figcaption><b>圖十四</b>靜態捕捉測試後銅片極板吸附碳粉之情形</figcaption></figure>
           <figure class="reveal d1"><div class="frame"><img src="images/fig13.png" width="1403" height="727" alt="ImageJ 影像分析流程" loading="lazy"></div><figcaption><b>圖十三</b>ImageJ 影像分析流程示意（以懸停高度 5 cm 為例）</figcaption></figure>
         </div>
+        </details>
       </div>
     </div>
 
@@ -1032,16 +1040,18 @@ ol.future li strong{color:var(--text)}
           <div><div class="v">0<small>跳火</small></div><div class="k">全程無異常放電，17 mm 間距無位移</div></div>
         </div>
         <figure class="reveal">
-          <div class="frame"><img src="images/draw/fig19.svg" width="1000" height="434" alt="粉塵擴散範圍示意" loading="lazy"></div>
-          <figcaption><b>圖十九</b>粉塵擴散範圍示意（水平 0–73 cm，沉積量最多處 27 cm，寬度約 21 cm）</figcaption>
-        </figure>
-        <figure class="reveal">
           <div class="frame"><img src="images/draw/fig20.svg" width="1000" height="400" alt="粉塵雲上緣擴散包絡線" loading="lazy"></div>
           <figcaption><b>圖二十</b>粉塵雲上緣擴散包絡線與水平距離之關係（水平 30 cm 以內為示意）</figcaption>
         </figure>
         <figure class="reveal">
           <div class="frame"><img src="images/draw/fig21.svg" width="920" height="470" alt="各運轉時間之平均粉塵質量與捕捉裝置吸附質量" loading="lazy"></div>
           <figcaption><b>圖二十一</b>350 RPM 下各運轉時間三次測試之平均粉塵質量與捕捉裝置吸附質量（誤差棒為標準差）</figcaption>
+        </figure>
+        <details class="more">
+          <summary>展開細節：擴散範圍、各次效率、沉積照片</summary>
+        <figure class="reveal">
+          <div class="frame"><img src="images/draw/fig19.svg" width="1000" height="434" alt="粉塵擴散範圍示意" loading="lazy"></div>
+          <figcaption><b>圖十九</b>粉塵擴散範圍示意（水平 0–73 cm，沉積量最多處 27 cm，寬度約 21 cm）</figcaption>
         </figure>
         <div class="tbl reveal">
           <table>
@@ -1060,6 +1070,7 @@ ol.future li strong{color:var(--text)}
           <div class="frame"><img src="images/fig18.jpg" width="900" height="694" alt="粉塵於收集面之實際沉積情形" loading="lazy"></div>
           <figcaption><b>圖十八</b>粉塵於收集面之實際沉積情形</figcaption>
         </figure>
+        </details>
       </div>
     </div>
 
@@ -1132,8 +1143,8 @@ ol.future li strong{color:var(--text)}
 
     <div class="grid g3 mt-s">
       <div class="card reveal"><h4>ESG 永續報告</h4><p class="small">大型物流車隊或客運業者加裝此類裝置，有助於納入企業 ESG 永續報告。</p></div>
-      <div class="card reveal d1"><h4>數據加值服務</h4><p class="small">若加入粉塵質量感測器，長期累積之磨耗數據或可作為預測性保養（提醒換胎）或路面品質分析之參考。</p></div>
-      <div class="card reveal d2"><h4>商用車隊優先導入</h4><p class="small">軸重高、里程長、單車 TRWP 排放量高於一般轎車，導入效益相對較高；輪拱空間與車載電力（通常 24 V）較寬裕；固定調度站便於標準化清理維護。</p></div>
+      <div class="card reveal d1"><h4>數據加值服務</h4><p class="small">加入粉塵質量感測器後，累積的磨耗數據可供預測性保養或路面品質分析參考。</p></div>
+      <div class="card reveal d2"><h4>商用車隊優先導入</h4><p class="small">軸重高、里程長，單車排放量高；空間與電力較寬裕，車隊便於集中維護。</p></div>
     </div>
 
     <div class="mt-l reveal">
@@ -1157,12 +1168,16 @@ ol.future li strong{color:var(--text)}
 
     <div class="mt-l">
       <h3 class="reveal">待解決之工程課題與對策 <span class="cite">表十</span></h3>
-      <div class="mt-s">
+      <p class="muted reveal" style="max-width:780px">實際車載應用尚有四項課題：粉塵回收與二次揚塵、潮濕與異物下的可靠性、6PPD 的分離與定量、銅片的成本與質量。</p>
+      <details class="more mt-s">
+        <summary>展開細節：四項課題的規劃對策</summary>
+        <div>
         <div class="issue reveal"><h4>捕捉粉塵回收與二次揚塵抑制</h4><p>改為可抽出式極板匣，停機後整匣回收；運轉時電場常開以壓制微粒脫落。另試驗塗佈薄層矽油增加附著，須以對照組評估反電暈（back corona）的影響。</p></div>
         <div class="issue reveal"><h4>潮濕與異物之運作可靠性</h4><p>雨滴感測模組遇水即斷電；進氣口加擋水百葉與不帶電粗網（孔徑 5–10 mm）阻擋水滴與落葉砂石；外殼內部噴塗超疏水塗層；集塵盒底部設單向排水閥。</p></div>
         <div class="issue reveal"><h4>6PPD 之分離與定量回收</h4><p>先捕捉、後萃取：裝置攔截含 6PPD 的橡膠微粒，回收後於實驗室以溶劑萃取，參考現行分析方法定量。</p></div>
         <div class="issue reveal"><h4>銅片耗材成本與質量優化</h4><p>評估以沖孔板或金屬網取代實心銅片，材質改用不鏽鋼（SUS 304/316）或鋁合金；須留意集塵面積減少與孔緣跳火風險。量產可評估導電塑膠射出成型。</p></div>
-      </div>
+        </div>
+      </details>
     </div>
 
     <div class="split mt-l" style="align-items:start">
