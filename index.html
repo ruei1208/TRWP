@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0a09'/%3E%3Crect x='17' y='14' width='5' height='36' rx='2' fill='%23ff8a1a'/%3E%3Crect x='29.5' y='14' width='5' height='36' rx='2' fill='%23ff8a1a'/%3E%3Crect x='42' y='14' width='5' height='36' rx='2' fill='%23ff8a1a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    配色與字體：只要改這裡就能整站微調
@@ -26,16 +26,17 @@
   --line:      rgba(var(--l),.14);     /* 分隔線 */
   --text:      #f2efe8;                /* 主文字 */
   --muted:     #a8a297;                /* 次要文字 */
-  --faint:     #77726a;                /* 更淡的註解 */
+  --faint:     #8d877c;                /* 更淡的註解（對比約 5:1） */
   --accent:    #ff8a1a;                /* 強調色：橘 */
   --accent-2:  #ffb35c;                /* 強調色淺階 */
   --accent-bg: rgba(255,138,26,.10);
   --eco:       #7fd6a4;                /* 只用於低壓控制迴路 */
   --danger:    #ff5a2e;
 
-  --font-sans: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
-  --font-num:  "JetBrains Mono", ui-monospace, Consolas, monospace;
-  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --font-head: "Noto Serif TC", "Songti TC", "PMingLiU", serif;                          /* 標題：明體 */
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; /* 內文：黑體 */
+  --font-num:  "JetBrains Mono", "Noto Sans TC", ui-monospace, Consolas, monospace;        /* 數字：等寬 */
+  --font-mono: "JetBrains Mono", "Noto Sans TC", ui-monospace, Consolas, monospace;
 
   --maxw: 1180px;
   --gutter: clamp(20px, 6vw, 88px);
@@ -495,6 +496,104 @@ details.more[open]>summary::before{content:"−"}
 details.more>summary:hover{color:var(--accent-2)}
 details.more>*:not(summary){margin-top:28px}
 details.more>*:last-child{margin-bottom:32px}
+
+/* =========================================================
+   字體：標題明體、內文黑體、數字等寬
+   ========================================================= */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-size:clamp(15.5px,1.05vw,17px);line-height:1.8;line-break:strict;font-kerning:normal}
+h1,h2,h3,h4,.statement p,.member .name,.sim-head h3{font-family:var(--font-head);text-wrap:balance}
+h2{font-weight:900;letter-spacing:.02em;line-height:1.25}
+h3{font-weight:700;letter-spacing:.02em;line-height:1.45}
+h4{font-weight:700;font-size:17.5px;letter-spacing:.02em;line-height:1.5}
+.hero h1{font-weight:900;letter-spacing:.01em}
+.statement p{font-weight:900;letter-spacing:.02em;line-height:1.45}
+p,li,figcaption,td{text-wrap:pretty}
+
+/* 內文與小字：加大最小字級、放寬行高 */
+.lead{line-height:1.8;letter-spacing:.01em}
+.small{font-size:14.5px;line-height:1.75}
+figcaption,.table-cap{font-size:13.5px;line-height:1.7;letter-spacing:.01em}
+.points li{font-size:15px;line-height:1.75}
+.points li b{font-weight:700;letter-spacing:.04em}
+.facts .k{font-size:13.5px;line-height:1.65}
+.specs .k,.hero-stats p{font-size:13.5px;line-height:1.65}
+.issue p{font-size:15px}
+.note{font-size:14.5px;line-height:1.8}
+.card .small,.member p{font-size:14.5px;line-height:1.75}
+ol.future li{font-size:15px;line-height:1.75}
+table{font-size:14.5px}
+.sim-foot{font-size:13.5px;line-height:1.7}
+.checklist li{font-size:14.5px}
+.checklist li div small{font-size:13px}
+.code-params{font-size:13.5px}
+.code-params span{font-size:13.5px}
+details ol{font-size:13px;line-height:1.7}
+.cite{font-size:12.5px}
+
+/* 等寬字標籤：統一字級與字距 */
+.eyebrow,.stage .no,.kpi .label,.sim-head .label{font-size:12.5px;letter-spacing:.16em}
+.nav ul{font-size:13px;letter-spacing:.14em}
+.tag{font-size:12.5px}
+.tbl th,th{font-size:12.5px;letter-spacing:.06em}
+.ruler span{font-size:11.5px}
+details.more>summary{font-size:13px}
+figcaption b,.table-cap b{font-size:12.5px}
+
+/* 數字 */
+.stat,.mega,.hero-stats .num,.specs .v,.facts .v,.formula .eq{font-variant-numeric:tabular-nums}
+td.num,th.num{font-variant-numeric:tabular-nums}
+p strong,li strong{font-weight:700}
+
+/* =========================================================
+   排版：間距、對齊與等高
+   ========================================================= */
+section{padding:clamp(64px,8.5vw,116px) 0}
+.statement{padding:clamp(72px,10vw,132px) 0}
+.mt-l{margin-top:clamp(56px,7vw,92px)}
+.mt-m{margin-top:clamp(36px,4.2vw,52px)}
+h2{margin-bottom:20px;max-width:16em}
+.lead{max-width:36em}
+.eyebrow{margin-bottom:18px}
+
+/* 問題段：數字列 */
+.big-stat{padding:clamp(32px,4.6vw,56px) 0;gap:clamp(24px,5vw,64px)}
+.big-stat h3{margin-bottom:10px}
+.big-stat p{max-width:32em}
+
+/* 卡片等高、內距一致 */
+.grid.g3>.card{display:flex;flex-direction:column;padding:22px 24px}
+.card h4{margin-bottom:8px}
+.formula{padding:24px}
+.specs>div{padding:20px 22px}
+
+/* 圖與圖說 */
+figcaption{margin-top:12px}
+figure .frame img{display:block}
+.duo-platform{grid-template-columns:minmax(0,.616fr) minmax(0,.96fr);align-items:start}
+.duo-static{grid-template-columns:minmax(0,.584fr) minmax(0,1.93fr);align-items:start}
+@media(max-width:640px){.duo-platform,.duo-static{grid-template-columns:minmax(0,1fr)}}
+
+/* 實驗成果：左欄在桌機固定，右欄圖表捲動 */
+.stage{padding:clamp(40px,5.4vw,72px) 0;gap:clamp(28px,5vw,72px)}
+.stage .no{text-transform:none}
+@media(min-width:821px){.stage>div:first-child{position:sticky;top:92px}}
+.stat{margin:24px 0 16px}
+.stage>div>*+figure,.stage>div>*+.facts,.stage>div>*+.figs,.stage>div>*+.tbl,.stage>div>*+details{margin-top:28px}
+.stage>div:last-child>:first-child{margin-top:0}
+.stage-end{padding-top:clamp(40px,5.4vw,72px)}
+.stage .points{margin-top:16px}
+
+/* 條列與細節 */
+.points li{padding:12px 0;gap:20px}
+details.more>*:not(summary){margin-top:24px}
+.split{gap:clamp(24px,4.4vw,56px)}
+.issue{padding:20px 0}
+
+/* 團隊與頁尾 */
+.member{padding:24px}
+.member .avatar{margin-bottom:16px}
+footer{padding-top:56px}
 </style>
 </head>
 <body>
@@ -975,7 +1074,7 @@ details.more>*:last-child{margin-bottom:32px}
         </ul>
       </div>
       <figure class="reveal mt-s"><div class="frame"><img src="images/fig06.jpg" width="1824" height="722" alt="輪轂馬達模組" loading="lazy"></div><figcaption><b>圖六</b>用於模擬之輪轂馬達模組</figcaption></figure>
-      <div class="grid g2 mt-s" style="align-items:start">
+      <div class="grid duo-platform mt-s">
         <figure class="reveal d1"><div class="frame"><img src="images/fig16.jpg" width="577" height="937" alt="動態摩擦測試之輪轂馬達實驗平台架設情形" loading="lazy"></div><figcaption><b>圖十六</b>動態摩擦測試之輪轂馬達實驗平台架設情形</figcaption></figure>
         <figure class="reveal d2"><div class="frame"><img src="images/fig17.jpg" width="1200" height="1250" alt="動態摩擦測試實驗裝置：輪胎下方鋪設砂紙，兩側白色角鋼固定輪轂馬達，向後下方延伸之角鋼末端安裝捕捉裝置" loading="lazy"></div><figcaption><b>圖十七</b>動態摩擦測試實驗裝置之整體架設（輪胎下方鋪設 #60 砂紙；向後下方延伸之角鋼末端為捕捉裝置與集塵盒之安裝位置）</figcaption></figure>
       </div>
@@ -993,7 +1092,7 @@ details.more>*:last-child{margin-bottom:32px}
     <!-- STAGE 1 靜態 -->
     <div class="stage mt-m">
       <div class="reveal">
-        <div class="no">Stage 1 · 靜態捕捉效率 η</div>
+        <div class="no">STAGE 1 · 靜態捕捉效率 η</div>
         <h3>電場開啟前後之捕捉效率比較</h3>
         <div class="stat"><span class="from">0.72 →</span><span data-count="16.29" data-dec="2">16.29</span><span class="u">%</span></div>
         <p>僅電場開關不同，效率相差約 <strong>22 倍</strong>；兩組數值範圍<strong>完全沒有重疊</strong>（關閉 ≤ 1.00%，開啟 9.00%–21.00%），差異可歸因於庫侖力。</p>
@@ -1015,7 +1114,7 @@ details.more>*:last-child{margin-bottom:32px}
           <div class="frame"><img src="images/draw/fig15.svg" width="1000" height="420" alt="核心面積隨懸停高度與時間之變化" loading="lazy"></div>
           <figcaption><b>圖十五</b>核心面積隨 (a) 懸停高度與 (b) 懸停時間之變化趨勢</figcaption>
         </figure>
-        <div class="grid g2 figs">
+        <div class="grid duo-static figs">
           <figure class="reveal"><div class="frame"><img src="images/fig14.jpg" width="547" height="945" alt="靜態捕捉測試後銅片極板吸附碳粉" loading="lazy"></div><figcaption><b>圖十四</b>靜態捕捉測試後銅片極板吸附碳粉之情形</figcaption></figure>
           <figure class="reveal d1"><div class="frame"><img src="images/fig13.png" width="1403" height="727" alt="ImageJ 影像分析流程" loading="lazy"></div><figcaption><b>圖十三</b>ImageJ 影像分析流程示意（以懸停高度 5 cm 為例）</figcaption></figure>
         </div>
@@ -1026,7 +1125,7 @@ details.more>*:last-child{margin-bottom:32px}
     <!-- STAGE 2 動態 -->
     <div class="stage">
       <div class="reveal">
-        <div class="no">Stage 2 · 動態平均捕捉效率</div>
+        <div class="no">STAGE 2 · 動態平均捕捉效率</div>
         <h3>粉塵擴散分布與動態捕捉效率</h3>
         <div class="stat">≈<span data-count="28" data-dec="0">28</span><span class="u">%</span></div>
         <p><strong>350 RPM</strong>（≈ 33 km/h）下摩擦砂紙 10／20／30 秒各三次，整體效率平均 <strong>27.6%</strong>；受天平解析度限制，約落於二成至三成。</p>
@@ -1077,7 +1176,7 @@ details.more>*:last-child{margin-bottom:32px}
     <!-- STAGE 3 質譜 -->
     <div class="stage">
       <div class="reveal">
-        <div class="no">Stage 3 · 質譜鑑定質量誤差（6PPD）</div>
+        <div class="no">STAGE 3 · 質譜鑑定質量誤差（6PPD）</div>
         <h3>兩組粉塵樣品之 6PPD 訊號比對</h3>
         <div class="stat"><span data-count="2.98" data-dec="2">2.98</span><span class="u">ppm</span></div>
         <p>兩組粉塵皆於 m/z 268 出現與 6PPD（C₁₈H₂₄N₂，理論 268.1934 Da）相近的訊號，誤差皆小於 5 ppm。</p>
@@ -1431,7 +1530,7 @@ details.more>*:last-child{margin-bottom:32px}
       // 極板
       ctx.fillStyle=V()>0?ACC:'#77726a'; ctx.fillRect(g.pl,g.top-6,g.L,6);
       ctx.fillStyle='#a8a297'; ctx.fillRect(g.pl,g.bot,g.L,6);
-      ctx.font='12px "Noto Serif TC",serif'; ctx.fillStyle='#a8a297';
+      ctx.font='12px "Noto Sans TC",sans-serif'; ctx.fillStyle='#a8a297';
       ctx.fillText(`正極板 +${V().toFixed(1)} kV`,g.pl,g.top-14);
       ctx.fillText('負極板（接地）',g.pl,g.bot+22);
       // 間距標示
