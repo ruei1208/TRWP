@@ -590,6 +590,39 @@ details.more>*:not(summary){margin-top:24px}
 .split{gap:clamp(24px,4.4vw,56px)}
 .issue{padding:20px 0}
 
+/* =========================================================
+   手機版（寬度 640px 以下）
+   ========================================================= */
+@media(max-width:640px){
+  section{padding:56px 0}
+  .statement{padding:60px 0}
+  .hero{padding-top:92px}
+  .hero-photo{max-width:220px}
+  /* 圖表在窄螢幕維持可讀大小，改為左右滑動 */
+  figure .frame:has(img[src*="/draw/"]:not([src*="fig09"])){overflow-x:auto;-webkit-overflow-scrolling:touch}
+  figure .frame img[src*="/draw/"]:not([src*="fig09"]){width:540px;max-width:none}
+  figure:has(img[src*="/draw/"]:not([src*="fig09"])) figcaption::after{content:"（圖可左右滑動）";color:var(--faint);margin-left:4px}
+  .tbl table{min-width:560px}
+  /* 條列：標籤與內容上下排列 */
+  .points li{gap:2px;padding:12px 0}
+  .points li b{color:var(--accent-2);font-size:13.5px}
+  /* 圖文區塊：標題在上、圖在下 */
+  .split.rev>:first-child{order:2}
+  .loop{flex-direction:column;align-items:flex-start;gap:8px}
+  .loop b{display:none}
+  .facts>div{padding:14px 0}
+  .stat{font-size:clamp(52px,17vw,76px)}
+  .mega{font-size:clamp(52px,17vw,76px)}
+  .big-stat{padding:32px 0}
+  .formula{padding:20px}
+  .sim-head{padding:16px}
+  .checklist li{padding:10px 12px;gap:10px}
+  .member{padding:20px}
+  footer .big{font-size:clamp(28px,9vw,44px)}
+  .ruler{bottom:14px}
+  footer{padding-bottom:84px}
+}
+
 /* 團隊與頁尾 */
 .member{padding:24px}
 .member .avatar{margin-bottom:16px}
