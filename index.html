@@ -627,6 +627,19 @@ details.more>*:not(summary){margin-top:24px}
 .member{padding:24px}
 .member .avatar{margin-bottom:16px}
 footer{padding-top:56px}
+
+/* 實驗平台照片 */
+.platform-photo{max-width:560px}
+/* 團隊：一人一列，工作項目逐行列出 */
+.team{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.team .member{display:grid;grid-template-columns:minmax(0,15em) minmax(0,1fr);gap:24px;align-items:start;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:22px 0}
+.team .who{display:flex;align-items:center;gap:16px}
+.team .member .avatar{margin:0;width:48px;height:48px;font-size:20px;flex:none}
+.team .member .role{margin:2px 0 0}
+.team .duties{list-style:none;display:grid;gap:6px;padding-top:4px}
+.team .duties li{position:relative;padding-left:18px;font-size:15px;color:var(--muted);line-height:1.6}
+.team .duties li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:1px;background:var(--accent)}
+@media(max-width:640px){.team .member{grid-template-columns:minmax(0,1fr);gap:14px;padding:20px 0}}
 </style>
 </head>
 <body>
@@ -1107,10 +1120,7 @@ footer{padding-top:56px}
         </ul>
       </div>
       <figure class="reveal mt-s"><div class="frame"><img src="images/fig06.jpg" width="1824" height="722" alt="輪轂馬達模組" loading="lazy"></div><figcaption><b>圖六</b>用於模擬之輪轂馬達模組</figcaption></figure>
-      <div class="grid duo-platform mt-s">
-        <figure class="reveal d1"><div class="frame"><img src="images/fig16.jpg" width="577" height="937" alt="動態摩擦測試之輪轂馬達實驗平台架設情形" loading="lazy"></div><figcaption><b>圖十六</b>動態摩擦測試之輪轂馬達實驗平台架設情形</figcaption></figure>
-        <figure class="reveal d2"><div class="frame"><img src="images/fig17.jpg" width="1200" height="1250" alt="動態摩擦測試實驗裝置：輪胎下方鋪設砂紙，兩側白色角鋼固定輪轂馬達，向後下方延伸之角鋼末端安裝捕捉裝置" loading="lazy"></div><figcaption><b>圖十七</b>動態摩擦測試實驗裝置之整體架設（輪胎下方鋪設 #60 砂紙；向後下方延伸之角鋼末端為捕捉裝置與集塵盒之安裝位置）</figcaption></figure>
-      </div>
+      <figure class="reveal mt-s platform-photo"><div class="frame"><img src="images/fig17-platform.webp" width="1168" height="1193" alt="動態摩擦測試實驗平台：輪轂馬達以白色角鋼固定於砂紙上方，向後下方延伸的角鋼末端安裝銅片極板捕捉裝置" loading="lazy"></div><figcaption><b>圖十七</b>動態摩擦測試實驗平台之整體架設（輪胎下方鋪設 #60 砂紙；向後下方延伸之角鋼末端為捕捉裝置安裝位置）</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1347,28 +1357,38 @@ footer{padding-top:56px}
     <p class="lead reveal">中原大學機械系 專題團隊</p>
     <div class="team mt-m">
       <div class="member prof reveal">
-        <div class="avatar">杜</div>
-        <div class="name">杜哲怡</div>
-        <div class="role">專題指導教授</div>
-        <p>中原大學機械系</p>
+        <div class="who"><div class="avatar">杜</div><div><div class="name">杜哲怡</div><div class="role">專題指導教授</div></div></div>
+        <ul class="duties">
+          <li>中原大學機械系</li>
+        </ul>
       </div>
       <div class="member reveal d1">
-        <div class="avatar">陳</div>
-        <div class="name">陳睿瑀</div>
-        <div class="role">專題生</div>
-        <p>3D CAD 模型設計與建模、高壓電路與雨滴感測器模組之電路設計與程式實作、實驗設計、數據分析、統整專題書面報告。</p>
+        <div class="who"><div class="avatar">陳</div><div><div class="name">陳睿瑀</div><div class="role">專題生</div></div></div>
+        <ul class="duties">
+          <li>3D CAD 模型設計與建模</li>
+          <li>高壓電路與雨滴感測器模組之電路設計與程式實作</li>
+          <li>實驗設計</li>
+          <li>數據分析</li>
+          <li>統整專題書面報告</li>
+        </ul>
       </div>
       <div class="member reveal d2">
-        <div class="avatar">李</div>
-        <div class="name">李恩</div>
-        <div class="role">專題生</div>
-        <p>輪轂馬達模組之架設、實驗器材之設計與組裝、電路佈線與焊接、系統絕緣與防漏電工程實作。</p>
+        <div class="who"><div class="avatar">李</div><div><div class="name">李恩</div><div class="role">專題生</div></div></div>
+        <ul class="duties">
+          <li>輪轂馬達模組之架設</li>
+          <li>實驗器材之設計與組裝</li>
+          <li>電路佈線與焊接</li>
+          <li>系統絕緣與防漏電工程實作</li>
+        </ul>
       </div>
       <div class="member reveal d3">
-        <div class="avatar">林</div>
-        <div class="name">林子鈞</div>
-        <div class="role">專題生</div>
-        <p>查閱 6PPD 採集與檢測相關文獻、測試流程擬定、樣品採集、質譜儀檢測結果統整與分析。</p>
+        <div class="who"><div class="avatar">林</div><div><div class="name">林子鈞</div><div class="role">專題生</div></div></div>
+        <ul class="duties">
+          <li>查閱 6PPD 採集與檢測相關文獻</li>
+          <li>測試流程擬定</li>
+          <li>樣品採集</li>
+          <li>質譜儀檢測結果統整與分析</li>
+        </ul>
       </div>
     </div>
     <div class="note mt-m reveal"><strong>致謝</strong>　感謝中原大學化學系蔡祐輔教授於質譜鑑定階段，慷慨提供 Bruker micrOTOF II 高解析飛行時間質譜儀供本團隊進行捕捉樣本之同位素分布比對。</div>
